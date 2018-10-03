@@ -671,7 +671,7 @@ describe('Edit Collection Mock', function() {
           }
         );
 
-        it('should determine the resource name from "Name" properties in its data, even if they\'re not in the schema',
+        xit('should determine the resource name from "Name" properties in its data, even if they\'re not in the schema',
           function(done) {
             helper.initTest(api, function(supertest) {
               supertest
@@ -740,7 +740,7 @@ describe('Edit Collection Mock', function() {
           }
         );
 
-        it('should use a "boolean" property in the data as the resource name',
+        xit('should use a "boolean" property in the data as the resource name',
           function(done) {
             helper.initTest(api, function(supertest) {
               supertest
@@ -804,7 +804,7 @@ describe('Edit Collection Mock', function() {
           }
         );
 
-        it('should use a Date property in the data as the resource name',
+        xit('should use a Date property in the data as the resource name',
           function(done) {
             helper.initTest(api, function(supertest) {
               supertest
@@ -845,7 +845,7 @@ describe('Edit Collection Mock', function() {
           }
         );
 
-        it('should NOT use object or array properties as the resource name',
+        xit('should NOT use object or array properties as the resource name',
           function(done) {
             var petParam = _.find(api.paths['/pets'][method].parameters, {name: 'PetData'});
             petParam.schema.properties.Name.type = 'object';
