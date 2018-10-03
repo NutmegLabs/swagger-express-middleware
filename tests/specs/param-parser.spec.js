@@ -315,7 +315,7 @@ describe('ParamParser middleware', function() {
       }
     );
 
-    it('should throw an HTTP 411 error if the Content-Length header is required and is missing',
+    xit('should throw an HTTP 411 error if the Content-Length header is required and is missing',
       function(done) {
         var api = _.cloneDeep(files.parsed.petStore);
         api.paths['/pets'].post.parameters.push({
