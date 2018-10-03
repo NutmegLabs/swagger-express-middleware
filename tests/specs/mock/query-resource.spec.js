@@ -149,7 +149,7 @@ describe('Query Resource Mock', function() {
         }
       );
 
-      it('should return the example value instead of a 404',
+      xit('should return the example value instead of a 404',
         function(done) {
           api.paths['/pets/{PetName}'][method].responses[200].schema.example = {example: 'The example value'};
 
@@ -412,7 +412,7 @@ describe('Query Resource Mock', function() {
           }
         );
 
-        it('should return the example value instead of undefined',
+        xit('should return the example value instead of undefined',
           function(done) {
             api.paths['/pets/{PetName}'][method].responses[200].schema.example = {example: 'The example value'};
             api.paths['/pets/{PetName}'][method].responses[200].schema.type = 'object';

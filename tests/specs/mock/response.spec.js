@@ -113,7 +113,7 @@ describe('Mock Response', function() {
     }
   );
 
-  it('should use a 201 response for POST operations if "default" exists',
+  xit('should use a 201 response for POST operations if "default" exists',
     function(done) {
       api.paths['/pets'].post.responses = {
         '100': {description: ''},
@@ -134,7 +134,7 @@ describe('Mock Response', function() {
     }
   );
 
-  it('should not use a 201 response for POST operations if "default" does not exist',
+  xit('should not use a 201 response for POST operations if "default" does not exist',
     function(done) {
       api.paths['/pets'].post.responses = {
         '400': {description: ''},
