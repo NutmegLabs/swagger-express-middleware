@@ -45,7 +45,7 @@
     "jscs": "^2.1.1",
     "jshint": "^2.9.6",
     "mocha": "^5.2.0",
-    "npm-check-updates": "^2.14.2",
+    "npm-check-updates": "^18.0.2",
     "sinon": "^1.16.1",
     "supertest": "^1.1.0",
     "version-bump-prompt": "^1.5.1"
