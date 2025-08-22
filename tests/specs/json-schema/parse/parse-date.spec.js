@@ -21,7 +21,7 @@ describe('JSON Schema - parse date params', function() {
       var express = helper.parse(schema, '2010-12-31', done);
 
       express.post('/api/test', helper.spy(function(req, res, next) {
-        expect(req.header('Test')).to.equalTime(new Date('2010-12-31'));
+        expect(req.header('Test')).to.equal('2010-12-31');
       }));
     }
   );
@@ -52,7 +52,7 @@ describe('JSON Schema - parse date params', function() {
       var express = helper.parse(schema, undefined, done);
 
       express.post('/api/test', helper.spy(function(req, res, next) {
-        expect(req.header('Test')).to.equalTime(new Date('1990-09-13'));
+        expect(req.header('Test')).to.equal('1990-09-13');
       }));
     }
   );
@@ -68,7 +68,7 @@ describe('JSON Schema - parse date params', function() {
       var express = helper.parse(schema, undefined, done);
 
       express.post('/api/test', helper.spy(function(req, res, next) {
-        expect(req.header('Test')).to.equalTime(new Date('1995-08-24'));
+        expect(req.header('Test')).to.equal('1995-08-24');
       }));
     }
   );
@@ -84,7 +84,7 @@ describe('JSON Schema - parse date params', function() {
       var express = helper.parse(schema, '', done);
 
       express.post('/api/test', helper.spy(function(req, res, next) {
-        expect(req.header('Test')).to.equalTime(new Date('2020-01-31'));
+        expect(req.header('Test')).to.equal('2020-01-31');
       }));
     }
   );
@@ -204,7 +204,7 @@ describe('JSON Schema - parse date params', function() {
       var express = helper.parse(schema, '2009-08-12', done);
 
       express.post('/api/test', helper.spy(function(req, res, next) {
-        expect(req.header('Test')).to.equalTime(new Date('2009-08-12'));
+        expect(req.header('Test')).to.equal('2009-08-12');
       }));
     }
   );
@@ -275,7 +275,7 @@ describe('JSON Schema - parse date params', function() {
       var express = helper.parse(schema, '2009-08-12', done);
 
       express.post('/api/test', helper.spy(function(req, res, next) {
-        expect(req.header('Test')).to.equalTime(new Date('2009-08-12'));
+        expect(req.header('Test')).to.equal('2009-08-12');
       }));
     }
   );

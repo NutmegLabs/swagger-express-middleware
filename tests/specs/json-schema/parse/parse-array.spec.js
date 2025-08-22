@@ -80,8 +80,8 @@ describe('JSON Schema - parse array params', function() {
 
       express.post('/api/test', helper.spy(function(req, res, next) {
         expect(req.header('Test')).to.have.lengthOf(2);
-        expect(req.header('Test')[0]).to.equalTime(new Date('1999-12-31'));
-        expect(req.header('Test')[1]).to.equalTime(new Date('2000-04-22'));
+        expect(req.header('Test')[0]).to.equal('1999-12-31');
+        expect(req.header('Test')[1]).to.equal('2000-04-22');
       }));
     }
   );
@@ -172,8 +172,8 @@ describe('JSON Schema - parse array params', function() {
 
       express.post('/api/test', helper.spy(function(req, res, next) {
         expect(req.header('Test')).to.have.lengthOf(2);
-        expect(req.header('Test')[0]).to.equalTime(new Date('2008-06-30T13:40:50Z'));
-        expect(req.header('Test')[1]).to.equalTime(new Date('1990-01-01T00:00:00-15:45'));
+        expect(req.header('Test')[0]).to.equal('2008-06-30T13:40:50Z');
+        expect(req.header('Test')[1]).to.equal('1990-01-01T00:00:00-15:45');
       }));
     }
   );
