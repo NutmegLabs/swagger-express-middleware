@@ -18,17 +18,17 @@ describe('JSON Schema - parse object params', function() {
       swagger(api, function(err, middleware) {
         var express = helper.express(middleware.metadata(), middleware.parseRequest());
 
-        helper.supertest(express)
-          .patch('/api/pets/fido')
-          .send({Name: 'Fido', Type: 'dog'})
-          .end(helper.checkSpyResults(done));
-
         express.patch('/api/pets/fido', helper.spy(function(req, res, next) {
           expect(req.body).to.deep.equal({
             Name: 'Fido',
             Type: 'dog'
           });
         }));
+
+        helper.supertest(express)
+          .patch('/api/pets/fido')
+          .send({Name: 'Fido', Type: 'dog'})
+          .end(helper.checkSpyResults(done));
       });
     }
   );
@@ -40,13 +40,13 @@ describe('JSON Schema - parse object params', function() {
       swagger(api, function(err, middleware) {
         var express = helper.express(middleware.metadata(), middleware.parseRequest());
 
-        helper.supertest(express)
-          .patch('/api/pets/fido')
-          .end(helper.checkSpyResults(done));
-
         express.patch('/api/pets/fido', helper.spy(function(req, res, next) {
           expect(req.body || '').to.be.empty;
         }));
+
+        helper.supertest(express)
+          .patch('/api/pets/fido')
+          .end(helper.checkSpyResults(done));
       });
     }
   );
@@ -59,16 +59,16 @@ describe('JSON Schema - parse object params', function() {
       swagger(api, function(err, middleware) {
         var express = helper.express(middleware.metadata(), middleware.parseRequest());
 
-        helper.supertest(express)
-          .patch('/api/pets/fido')
-          .end(helper.checkSpyResults(done));
-
         express.patch('/api/pets/fido', helper.spy(function(req, res, next) {
           expect(req.body).to.deep.equal({
             Name: 'Fido',
             Type: 'dog'
           });
         }));
+
+        helper.supertest(express)
+          .patch('/api/pets/fido')
+          .end(helper.checkSpyResults(done));
       });
     }
   );
@@ -81,16 +81,16 @@ describe('JSON Schema - parse object params', function() {
       swagger(api, function(err, middleware) {
         var express = helper.express(middleware.metadata(), middleware.parseRequest());
 
-        helper.supertest(express)
-          .patch('/api/pets/fido')
-          .end(helper.checkSpyResults(done));
-
         express.patch('/api/pets/fido', helper.spy(function(req, res, next) {
           expect(req.body).to.deep.equal({
             Name: 'Fido',
             Type: 'dog'
           });
         }));
+
+        helper.supertest(express)
+          .patch('/api/pets/fido')
+          .end(helper.checkSpyResults(done));
       });
     }
   );
@@ -103,18 +103,18 @@ describe('JSON Schema - parse object params', function() {
       swagger(api, function(err, middleware) {
         var express = helper.express(middleware.metadata(), middleware.parseRequest());
 
-        helper.supertest(express)
-          .patch('/api/pets/fido')
-          .set('content-type', 'text/plain')
-          .send('')
-          .end(helper.checkSpyResults(done));
-
         express.patch('/api/pets/fido', helper.spy(function(req, res, next) {
           expect(req.body).to.deep.equal({
             Name: 'Fido',
             Type: 'dog'
           });
         }));
+
+        helper.supertest(express)
+          .patch('/api/pets/fido')
+          .set('content-type', 'text/plain')
+          .send('')
+          .end(helper.checkSpyResults(done));
       });
     }
   );
@@ -124,17 +124,17 @@ describe('JSON Schema - parse object params', function() {
       swagger(api, function(err, middleware) {
         var express = helper.express(middleware.metadata(), middleware.parseRequest());
 
-        helper.supertest(express)
-          .patch('/api/pets/fido')
-          .set('content-type', 'text/plain')
-          .send('')
-          .end(helper.checkSpyResults(done));
-
         express.use('/api/pets/fido', helper.spy(function(err, req, res, next) {
           expect(err).to.be.an.instanceOf(Error);
           expect(err.status).to.equal(400);
           expect(err.message).to.contain('Missing required body parameter "PetData"');
         }));
+
+        helper.supertest(express)
+          .patch('/api/pets/fido')
+          .set('content-type', 'text/plain')
+          .send('')
+          .end(helper.checkSpyResults(done));
       });
     }
   );
@@ -144,16 +144,16 @@ describe('JSON Schema - parse object params', function() {
       swagger(api, function(err, middleware) {
         var express = helper.express(middleware.metadata(), middleware.parseRequest());
 
-        helper.supertest(express)
-          .patch('/api/pets/fido')
-          .send({Name: 'Fido', Type: 'kitty kat'})
-          .end(helper.checkSpyResults(done));
-
         express.use('/api/pets/fido', helper.spy(function(err, req, res, next) {
           expect(err).to.be.an.instanceOf(Error);
           expect(err.status).to.equal(400);
           // expect(err.message).to.contain('No enum match for: "kitty kat"');
         }));
+
+        helper.supertest(express)
+          .patch('/api/pets/fido')
+          .send({Name: 'Fido', Type: 'kitty kat'})
+          .end(helper.checkSpyResults(done));
       });
     }
   );
@@ -163,15 +163,15 @@ describe('JSON Schema - parse object params', function() {
       swagger(api, function(err, middleware) {
         var express = helper.express(middleware.metadata(), middleware.parseRequest());
 
-        helper.supertest(express)
-          .patch('/api/pets/fido')
-          .end(helper.checkSpyResults(done));
-
         express.use('/api/pets/fido', helper.spy(function(err, req, res, next) {
           expect(err).to.be.an.instanceOf(Error);
           expect(err.status).to.equal(400);
           expect(err.message).to.contain('Missing required body parameter "PetData"');
         }));
+
+        helper.supertest(express)
+          .patch('/api/pets/fido')
+          .end(helper.checkSpyResults(done));
       });
     }
   );

@@ -1,0 +1,839 @@
+  1) FileServer middleware
+       HEAD
+         dereferenced JSON file
+           should return an HTTP 500 if the Swagger API is invalid:
+     Uncaught TypeError: Cannot read properties of null (reading '$refs')
+      at fileServer (lib/file-server.js:25:55)
+      at Middleware.files (lib/middleware.js:109:12)
+      at /Users/andrewspencer/react/swagger-express-middleware/tests/specs/file-server.spec.js:272:55
+      at /Users/andrewspencer/react/swagger-express-middleware/lib/middleware.js:65:11
+      at /Users/andrewspencer/react/swagger-express-middleware/node_modules/call-me-maybe/src/maybe.js:11:28
+      at process.processTicksAndRejections (node:internal/process/task_queues:77:11)
+
+  2) FileServer middleware
+       GET
+         dereferenced JSON file
+           should return an HTTP 500 if the Swagger API is invalid:
+     Uncaught TypeError: Cannot read properties of null (reading '$refs')
+      at fileServer (lib/file-server.js:25:55)
+      at Middleware.files (lib/middleware.js:109:12)
+      at /Users/andrewspencer/react/swagger-express-middleware/tests/specs/file-server.spec.js:272:55
+      at /Users/andrewspencer/react/swagger-express-middleware/lib/middleware.js:65:11
+      at /Users/andrewspencer/react/swagger-express-middleware/node_modules/call-me-maybe/src/maybe.js:11:28
+      at process.processTicksAndRejections (node:internal/process/task_queues:77:11)
+
+  3) JSON Schema - parse file params
+       should parse an optional, unspecified file param:
+     cannot POST /api/pets/fido/photos (500)<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Error</title>
+</head>
+<body>
+<pre>TypeError: Cannot read properties of undefined (reading 'Photo')
+    at /Users/andrewspencer/react/swagger-express-middleware/lib/param-parser.js:59:64
+    at Array.forEach (<anonymous>)
+    at parseFormDataParams (/Users/andrewspencer/react/swagger-express-middleware/lib/param-parser.js:53:18)
+    at Layer.handle [as handle_request] (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:328:13)
+    at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:346:12)
+    at next (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:280:10)
+    at parseSimpleParams (/Users/andrewspencer/react/swagger-express-middleware/lib/param-parser.js:46:3)
+    at Layer.handle [as handle_request] (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:328:13)
+    at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:346:12)
+    at next (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:280:10)
+    at /Users/andrewspencer/react/swagger-express-middleware/lib/request-parser.js:67:7
+    at Layer.handle [as handle_request] (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:328:13)
+    at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:346:12)
+    at next (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:280:10)
+    at multerMiddleware (/Users/andrewspencer/react/swagger-express-middleware/node_modules/multer/lib/make-middleware.js:19:41)
+    at Layer.handle [as handle_request] (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:328:13)
+    at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:346:12)
+    at next (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:280:10)
+    at rawParser (/Users/andrewspencer/react/swagger-express-middleware/node_modules/body-parser/lib/types/raw.js:76:7)
+    at Layer.handle [as handle_request] (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:328:13)
+    at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:346:12)
+    at next (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:280:10)
+    at urlencodedParser (/Users/andrewspencer/react/swagger-express-middleware/node_modules/body-parser/lib/types/urlencoded.js:103:7)
+    at Layer.handle [as handle_request] (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:328:13)
+    at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:346:12)
+    at next (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:280:10)
+    at textParser (/Users/andrewspencer/react/swagger-express-middleware/node_modules/body-parser/lib/types/text.js:78:7)
+    at Layer.handle [as handle_request] (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:328:13)
+    at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:346:12)
+    at next (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:280:10)
+    at jsonParser (/Users/andrewspencer/react/swagger-express-middleware/node_modules/body-parser/lib/types/json.js:122:7)
+    at Layer.handle [as handle_request] (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:328:13)
+    at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:346:12)
+    at next (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:280:10)
+    at cookieParser (/Users/andrewspencer/react/swagger-express-middleware/node_modules/cookie-parser/index.js:57:14)
+    at Layer.handle [as handle_request] (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:328:13)
+    at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:346:12)
+    at next (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:280:10)
+    at swaggerSecurityMetadata (/Users/andrewspencer/react/swagger-express-middleware/lib/request-metadata.js:175:3)
+    at Layer.handle [as handle_request] (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:328:13)
+    at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:346:12)
+    at next (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:280:10)
+    at swaggerParamsMetadata (/Users/andrewspencer/react/swagger-express-middleware/lib/request-metadata.js:159:3)
+    at Layer.handle [as handle_request] (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:328:13)
+    at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:346:12)
+    at next (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:280:10)
+    at swaggerOperationMetadata (/Users/andrewspencer/react/swagger-express-middleware/lib/request-metadata.js:151:3)
+    at Layer.handle [as handle_request] (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:328:13)
+    at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:346:12)
+    at next (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:280:10)
+    at swaggerPathMetadata (/Users/andrewspencer/react/swagger-express-middleware/lib/request-metadata.js:75:5)
+    at Layer.handle [as handle_request] (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:328:13)
+    at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:346:12)
+    at next (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:280:10)
+    at swaggerApiMetadata (/Users/andrewspencer/react/swagger-express-middleware/lib/request-metadata.js:40:5)
+    at Layer.handle [as handle_request] (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:328:13)
+    at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:346:12)
+    at next (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:280:10)
+    at swaggerMetadata (/Users/andrewspencer/react/swagger-express-middleware/lib/request-metadata.js:133:3)
+    at Layer.handle [as handle_request] (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:328:13)
+    at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:346:12)
+    at next (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:280:10)
+    at expressInit (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/middleware/init.js:40:5)
+    at Layer.handle [as handle_request] (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:328:13)
+    at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:346:12)
+    at next (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:280:10)
+    at query (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/middleware/query.js:45:5)
+    at Layer.handle [as handle_request] (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:328:13)
+    at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:346:12)
+    at next (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:280:10)
+    at Function.handle (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:175:3)
+    at Function.handle (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/application.js:181:10)
+    at Server.app (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/express.js:39:9)
+    at Server.emit (node:events:519:28)
+    at parserOnIncoming (node:_http_server:1140:12)
+    at HTTPParser.parserOnHeadersComplete (node:_http_common:119:17)</pre>
+</body>
+</html>
+
+  4) JSON Schema - parse file params
+       should parse the default File value if no value is specified:
+     cannot POST /api/pets/fido/photos (500)<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Error</title>
+</head>
+<body>
+<pre>TypeError: Cannot read properties of undefined (reading 'Photo')
+    at /Users/andrewspencer/react/swagger-express-middleware/lib/param-parser.js:59:64
+    at Array.forEach (<anonymous>)
+    at parseFormDataParams (/Users/andrewspencer/react/swagger-express-middleware/lib/param-parser.js:53:18)
+    at Layer.handle [as handle_request] (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:328:13)
+    at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:346:12)
+    at next (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:280:10)
+    at parseSimpleParams (/Users/andrewspencer/react/swagger-express-middleware/lib/param-parser.js:46:3)
+    at Layer.handle [as handle_request] (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:328:13)
+    at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:346:12)
+    at next (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:280:10)
+    at /Users/andrewspencer/react/swagger-express-middleware/lib/request-parser.js:67:7
+    at Layer.handle [as handle_request] (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:328:13)
+    at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:346:12)
+    at next (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:280:10)
+    at multerMiddleware (/Users/andrewspencer/react/swagger-express-middleware/node_modules/multer/lib/make-middleware.js:19:41)
+    at Layer.handle [as handle_request] (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:328:13)
+    at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:346:12)
+    at next (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:280:10)
+    at rawParser (/Users/andrewspencer/react/swagger-express-middleware/node_modules/body-parser/lib/types/raw.js:76:7)
+    at Layer.handle [as handle_request] (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:328:13)
+    at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:346:12)
+    at next (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:280:10)
+    at urlencodedParser (/Users/andrewspencer/react/swagger-express-middleware/node_modules/body-parser/lib/types/urlencoded.js:103:7)
+    at Layer.handle [as handle_request] (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:328:13)
+    at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:346:12)
+    at next (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:280:10)
+    at textParser (/Users/andrewspencer/react/swagger-express-middleware/node_modules/body-parser/lib/types/text.js:78:7)
+    at Layer.handle [as handle_request] (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:328:13)
+    at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:346:12)
+    at next (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:280:10)
+    at jsonParser (/Users/andrewspencer/react/swagger-express-middleware/node_modules/body-parser/lib/types/json.js:122:7)
+    at Layer.handle [as handle_request] (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:328:13)
+    at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:346:12)
+    at next (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:280:10)
+    at cookieParser (/Users/andrewspencer/react/swagger-express-middleware/node_modules/cookie-parser/index.js:57:14)
+    at Layer.handle [as handle_request] (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:328:13)
+    at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:346:12)
+    at next (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:280:10)
+    at swaggerSecurityMetadata (/Users/andrewspencer/react/swagger-express-middleware/lib/request-metadata.js:175:3)
+    at Layer.handle [as handle_request] (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:328:13)
+    at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:346:12)
+    at next (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:280:10)
+    at swaggerParamsMetadata (/Users/andrewspencer/react/swagger-express-middleware/lib/request-metadata.js:159:3)
+    at Layer.handle [as handle_request] (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:328:13)
+    at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:346:12)
+    at next (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:280:10)
+    at swaggerOperationMetadata (/Users/andrewspencer/react/swagger-express-middleware/lib/request-metadata.js:151:3)
+    at Layer.handle [as handle_request] (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:328:13)
+    at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:346:12)
+    at next (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:280:10)
+    at swaggerPathMetadata (/Users/andrewspencer/react/swagger-express-middleware/lib/request-metadata.js:75:5)
+    at Layer.handle [as handle_request] (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:328:13)
+    at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:346:12)
+    at next (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:280:10)
+    at swaggerApiMetadata (/Users/andrewspencer/react/swagger-express-middleware/lib/request-metadata.js:40:5)
+    at Layer.handle [as handle_request] (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:328:13)
+    at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:346:12)
+    at next (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:280:10)
+    at swaggerMetadata (/Users/andrewspencer/react/swagger-express-middleware/lib/request-metadata.js:133:3)
+    at Layer.handle [as handle_request] (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:328:13)
+    at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:346:12)
+    at next (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:280:10)
+    at expressInit (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/middleware/init.js:40:5)
+    at Layer.handle [as handle_request] (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:328:13)
+    at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:346:12)
+    at next (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:280:10)
+    at query (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/middleware/query.js:45:5)
+    at Layer.handle [as handle_request] (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:328:13)
+    at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:346:12)
+    at next (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:280:10)
+    at Function.handle (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:175:3)
+    at Function.handle (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/application.js:181:10)
+    at Server.app (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/express.js:39:9)
+    at Server.emit (node:events:519:28)
+    at parserOnIncoming (node:_http_server:1140:12)
+    at HTTPParser.parserOnHeadersComplete (node:_http_common:119:17)</pre>
+</body>
+</html>
+
+  5) JSON Schema - parse file params
+       should throw an error if required and not specified:
+     AssertionError: expected undefined to equal 400
+      at /Users/andrewspencer/react/swagger-express-middleware/tests/specs/json-schema/parse/parse-file.spec.js:204:33
+      at tryCatch (tests/fixtures/helper.js:87:9)
+      at /Users/andrewspencer/react/swagger-express-middleware/tests/fixtures/helper.js:74:7
+      at Layer.handle_error (node_modules/express/lib/router/layer.js:71:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:326:13)
+      at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at Layer.handle_error (node_modules/express/lib/router/layer.js:67:12)
+      at trim_prefix (node_modules/express/lib/router/index.js:326:13)
+      at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at Layer.handle_error (node_modules/express/lib/router/layer.js:67:12)
+      at trim_prefix (node_modules/express/lib/router/index.js:326:13)
+      at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:97:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at parseSimpleParams (lib/param-parser.js:46:3)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at /Users/andrewspencer/react/swagger-express-middleware/lib/request-parser.js:67:7
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at multerMiddleware (node_modules/multer/lib/make-middleware.js:19:41)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at rawParser (node_modules/body-parser/lib/types/raw.js:76:7)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at urlencodedParser (node_modules/body-parser/lib/types/urlencoded.js:103:7)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at textParser (node_modules/body-parser/lib/types/text.js:78:7)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at jsonParser (node_modules/body-parser/lib/types/json.js:122:7)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at cookieParser (node_modules/cookie-parser/index.js:57:14)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at swaggerSecurityMetadata (lib/request-metadata.js:175:3)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at swaggerParamsMetadata (lib/request-metadata.js:159:3)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at swaggerOperationMetadata (lib/request-metadata.js:151:3)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at swaggerPathMetadata (lib/request-metadata.js:75:5)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at swaggerApiMetadata (lib/request-metadata.js:40:5)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at swaggerMetadata (lib/request-metadata.js:133:3)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at expressInit (node_modules/express/lib/middleware/init.js:40:5)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at query (node_modules/express/lib/middleware/query.js:45:5)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at Function.handle (node_modules/express/lib/router/index.js:175:3)
+      at Function.handle (node_modules/express/lib/application.js:181:10)
+      at Server.app (node_modules/express/lib/express.js:39:9)
+      at Server.emit (node:events:519:28)
+      at parserOnIncoming (node:_http_server:1140:12)
+      at HTTPParser.parserOnHeadersComplete (node:_http_common:119:17)
+
+  6) JSON Schema - parse file params
+       should throw an error if the value is not a file:
+     AssertionError: expected undefined to equal 400
+      at /Users/andrewspencer/react/swagger-express-middleware/tests/specs/json-schema/parse/parse-file.spec.js:225:33
+      at tryCatch (tests/fixtures/helper.js:87:9)
+      at /Users/andrewspencer/react/swagger-express-middleware/tests/fixtures/helper.js:74:7
+      at Layer.handle_error (node_modules/express/lib/router/layer.js:71:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:326:13)
+      at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at Layer.handle_error (node_modules/express/lib/router/layer.js:67:12)
+      at trim_prefix (node_modules/express/lib/router/index.js:326:13)
+      at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at Layer.handle_error (node_modules/express/lib/router/layer.js:67:12)
+      at trim_prefix (node_modules/express/lib/router/index.js:326:13)
+      at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:97:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at parseSimpleParams (lib/param-parser.js:46:3)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at /Users/andrewspencer/react/swagger-express-middleware/lib/request-parser.js:67:7
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at multerMiddleware (node_modules/multer/lib/make-middleware.js:19:41)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at rawParser (node_modules/body-parser/lib/types/raw.js:76:7)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at urlencodedParser (node_modules/body-parser/lib/types/urlencoded.js:103:7)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at textParser (node_modules/body-parser/lib/types/text.js:78:7)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at jsonParser (node_modules/body-parser/lib/types/json.js:122:7)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at cookieParser (node_modules/cookie-parser/index.js:57:14)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at swaggerSecurityMetadata (lib/request-metadata.js:175:3)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at swaggerParamsMetadata (lib/request-metadata.js:159:3)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at swaggerOperationMetadata (lib/request-metadata.js:151:3)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at swaggerPathMetadata (lib/request-metadata.js:75:5)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at swaggerApiMetadata (lib/request-metadata.js:40:5)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at swaggerMetadata (lib/request-metadata.js:133:3)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at expressInit (node_modules/express/lib/middleware/init.js:40:5)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at query (node_modules/express/lib/middleware/query.js:45:5)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at Function.handle (node_modules/express/lib/router/index.js:175:3)
+      at Function.handle (node_modules/express/lib/application.js:181:10)
+      at Server.app (node_modules/express/lib/express.js:39:9)
+      at Server.emit (node:events:519:28)
+      at parserOnIncoming (node:_http_server:1140:12)
+      at HTTPParser.parserOnHeadersComplete (node:_http_common:119:17)
+
+  7) JSON Schema - parse object params
+       should throw an error if the value is blank:
+     Error: cannot PATCH /api/pets/fido (404)<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Error</title>
+</head>
+<body>
+<pre>Cannot PATCH /api/pets/fido</pre>
+</body>
+</html>
+
+  8) Query Collection Mock
+       DELETE
+         different data types
+           should delete multipart/form-data:
+
+  9) Query Collection Mock
+       DELETE
+         different data types
+           should delete a file:
+
+  10) Query Collection Mock
+       DELETE
+         different data types
+           should delete a file attachment:
+
+  11) Edit Resource Mock
+       DELETE
+         different data types
+           should return multipart/form-data:
+
+  12) Edit Collection Mock
+       PATCH
+         Determining resource names (by data type)
+           should support undefined values:
+
+  13) Edit Collection Mock
+       PATCH
+         Determining resource names (by data type)
+           should support multipart/form-data:
+
+  14) Edit Collection Mock
+       PATCH
+         Determining resource names (by file name)
+           should use the server-side file name as the resource name:
+
+  15) Edit Collection Mock
+       PATCH
+         Determining resource names (by file name)
+           should use an auto-generated resource name if the body is empty:
+     cannot PATCH /api/pets/Fido/photos (500)<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Error</title>
+</head>
+<body>
+<pre>TypeError: Cannot create property 'Label' on string ''
+    at /Users/andrewspencer/react/swagger-express-middleware/lib/param-parser.js:63:30
+    at Array.forEach (<anonymous>)
+    at parseFormDataParams (/Users/andrewspencer/react/swagger-express-middleware/lib/param-parser.js:53:18)
+    at Layer.handle [as handle_request] (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:328:13)
+    at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:346:12)
+    at next (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:280:10)
+    at parseSimpleParams (/Users/andrewspencer/react/swagger-express-middleware/lib/param-parser.js:46:3)
+    at Layer.handle [as handle_request] (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:328:13)
+    at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:346:12)
+    at next (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:280:10)
+    at /Users/andrewspencer/react/swagger-express-middleware/lib/request-parser.js:67:7
+    at Layer.handle [as handle_request] (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:328:13)
+    at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:346:12)
+    at next (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:280:10)
+    at multerMiddleware (/Users/andrewspencer/react/swagger-express-middleware/node_modules/multer/lib/make-middleware.js:19:41)
+    at Layer.handle [as handle_request] (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:328:13)
+    at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:346:12)
+    at next (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:280:10)
+    at rawParser (/Users/andrewspencer/react/swagger-express-middleware/node_modules/body-parser/lib/types/raw.js:58:7)
+    at Layer.handle [as handle_request] (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:328:13)
+    at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:346:12)
+    at next (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:280:10)
+    at urlencodedParser (/Users/andrewspencer/react/swagger-express-middleware/node_modules/body-parser/lib/types/urlencoded.js:85:7)
+    at Layer.handle [as handle_request] (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:328:13)
+    at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:346:12)
+    at next (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:280:10)
+    at /Users/andrewspencer/react/swagger-express-middleware/node_modules/body-parser/lib/read.js:137:5
+    at AsyncResource.runInAsyncScope (node:async_hooks:206:9)
+    at invokeCallback (/Users/andrewspencer/react/swagger-express-middleware/node_modules/raw-body/index.js:238:16)
+    at done (/Users/andrewspencer/react/swagger-express-middleware/node_modules/raw-body/index.js:227:7)
+    at IncomingMessage.onEnd (/Users/andrewspencer/react/swagger-express-middleware/node_modules/raw-body/index.js:287:7)
+    at IncomingMessage.emit (node:events:519:28)
+    at endReadableNT (node:internal/streams/readable:1696:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)</pre>
+</body>
+</html>
+
+  16) Edit Collection Mock
+       PUT
+         Determining resource names (by data type)
+           should support undefined values:
+
+  17) Edit Collection Mock
+       PUT
+         Determining resource names (by data type)
+           should support multipart/form-data:
+
+  18) Edit Collection Mock
+       PUT
+         Determining resource names (by file name)
+           should use the server-side file name as the resource name:
+
+  19) Edit Collection Mock
+       PUT
+         Determining resource names (by file name)
+           should use an auto-generated resource name if the body is empty:
+     cannot PUT /api/pets/Fido/photos (500)<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Error</title>
+</head>
+<body>
+<pre>TypeError: Cannot create property 'Label' on string ''
+    at /Users/andrewspencer/react/swagger-express-middleware/lib/param-parser.js:63:30
+    at Array.forEach (<anonymous>)
+    at parseFormDataParams (/Users/andrewspencer/react/swagger-express-middleware/lib/param-parser.js:53:18)
+    at Layer.handle [as handle_request] (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:328:13)
+    at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:346:12)
+    at next (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:280:10)
+    at parseSimpleParams (/Users/andrewspencer/react/swagger-express-middleware/lib/param-parser.js:46:3)
+    at Layer.handle [as handle_request] (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:328:13)
+    at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:346:12)
+    at next (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:280:10)
+    at /Users/andrewspencer/react/swagger-express-middleware/lib/request-parser.js:67:7
+    at Layer.handle [as handle_request] (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:328:13)
+    at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:346:12)
+    at next (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:280:10)
+    at multerMiddleware (/Users/andrewspencer/react/swagger-express-middleware/node_modules/multer/lib/make-middleware.js:19:41)
+    at Layer.handle [as handle_request] (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:328:13)
+    at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:346:12)
+    at next (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:280:10)
+    at rawParser (/Users/andrewspencer/react/swagger-express-middleware/node_modules/body-parser/lib/types/raw.js:58:7)
+    at Layer.handle [as handle_request] (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:328:13)
+    at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:346:12)
+    at next (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:280:10)
+    at urlencodedParser (/Users/andrewspencer/react/swagger-express-middleware/node_modules/body-parser/lib/types/urlencoded.js:85:7)
+    at Layer.handle [as handle_request] (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:328:13)
+    at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:346:12)
+    at next (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:280:10)
+    at /Users/andrewspencer/react/swagger-express-middleware/node_modules/body-parser/lib/read.js:137:5
+    at AsyncResource.runInAsyncScope (node:async_hooks:206:9)
+    at invokeCallback (/Users/andrewspencer/react/swagger-express-middleware/node_modules/raw-body/index.js:238:16)
+    at done (/Users/andrewspencer/react/swagger-express-middleware/node_modules/raw-body/index.js:227:7)
+    at IncomingMessage.onEnd (/Users/andrewspencer/react/swagger-express-middleware/node_modules/raw-body/index.js:287:7)
+    at IncomingMessage.emit (node:events:519:28)
+    at endReadableNT (node:internal/streams/readable:1696:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)</pre>
+</body>
+</html>
+
+  20) Edit Collection Mock
+       POST
+         Determining resource names (by data type)
+           should support undefined values:
+
+  21) Edit Collection Mock
+       POST
+         Determining resource names (by data type)
+           should support multipart/form-data:
+
+  22) Edit Collection Mock
+       POST
+         Determining resource names (by file name)
+           should use the server-side file name as the resource name:
+
+  23) Edit Collection Mock
+       POST
+         Determining resource names (by file name)
+           should use an auto-generated resource name if the body is empty:
+     cannot POST /api/pets/Fido/photos (500)<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Error</title>
+</head>
+<body>
+<pre>TypeError: Cannot create property 'Label' on string ''
+    at /Users/andrewspencer/react/swagger-express-middleware/lib/param-parser.js:63:30
+    at Array.forEach (<anonymous>)
+    at parseFormDataParams (/Users/andrewspencer/react/swagger-express-middleware/lib/param-parser.js:53:18)
+    at Layer.handle [as handle_request] (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:328:13)
+    at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:346:12)
+    at next (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:280:10)
+    at parseSimpleParams (/Users/andrewspencer/react/swagger-express-middleware/lib/param-parser.js:46:3)
+    at Layer.handle [as handle_request] (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:328:13)
+    at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:346:12)
+    at next (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:280:10)
+    at /Users/andrewspencer/react/swagger-express-middleware/lib/request-parser.js:67:7
+    at Layer.handle [as handle_request] (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:328:13)
+    at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:346:12)
+    at next (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:280:10)
+    at multerMiddleware (/Users/andrewspencer/react/swagger-express-middleware/node_modules/multer/lib/make-middleware.js:19:41)
+    at Layer.handle [as handle_request] (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:328:13)
+    at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:346:12)
+    at next (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:280:10)
+    at rawParser (/Users/andrewspencer/react/swagger-express-middleware/node_modules/body-parser/lib/types/raw.js:58:7)
+    at Layer.handle [as handle_request] (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:328:13)
+    at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:346:12)
+    at next (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:280:10)
+    at urlencodedParser (/Users/andrewspencer/react/swagger-express-middleware/node_modules/body-parser/lib/types/urlencoded.js:85:7)
+    at Layer.handle [as handle_request] (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:328:13)
+    at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:346:12)
+    at next (/Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:280:10)
+    at /Users/andrewspencer/react/swagger-express-middleware/node_modules/body-parser/lib/read.js:137:5
+    at AsyncResource.runInAsyncScope (node:async_hooks:206:9)
+    at invokeCallback (/Users/andrewspencer/react/swagger-express-middleware/node_modules/raw-body/index.js:238:16)
+    at done (/Users/andrewspencer/react/swagger-express-middleware/node_modules/raw-body/index.js:227:7)
+    at IncomingMessage.onEnd (/Users/andrewspencer/react/swagger-express-middleware/node_modules/raw-body/index.js:287:7)
+    at IncomingMessage.emit (node:events:519:28)
+    at endReadableNT (node:internal/streams/readable:1696:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)</pre>
+</body>
+</html>
+
+  24) Edit Resource Mock
+       PUT
+         Data type tests
+           should return multipart/form-data:
+
+  25) Edit Resource Mock
+       PATCH
+         Data type tests
+           should return multipart/form-data:
+
+  26) Edit Resource Mock
+       POST
+         Data type tests
+           should return multipart/form-data:
+
+  27) Query Collection Mock
+       application/json
+         GET
+           different data types
+             should return multipart/form-data:
+
+  28) Query Collection Mock
+       application/json
+         GET
+           different data types
+             should return a file:
+
+  29) Query Collection Mock
+       application/json
+         GET
+           different data types
+             should return a file attachment:
+
+  30) Query Resource Mock
+       GET
+         different data types
+           should return multipart/form-data:
+
+  31) ParamParser middleware
+       Form Data param parser
+         should parse file params:
+
+  32) RequestParser middleware
+       Multipart form data parser
+         should parse simple fields:
+
+  33) RequestParser middleware
+       Multipart form data parser
+         should support large file attachments by default:
+
