@@ -2,7 +2,7 @@
 
 var _              = require('lodash'),
     path           = require('path'),
-    mkdirp         = require('mkdirp'),
+    mkdirp         = require('mkdirp').mkdirp,
     swaggerMethods = require('swagger-methods'),
     petStoreJSON   = require('../files/petstore.json');
 
@@ -67,7 +67,9 @@ exports.parsed = {
 exports.createTempDir = function(done) {
   setTimeout(function() {
     var dirName = path.join(exports.paths.tempDir, new Date().toJSON().replace(/:/g, '-'));
-    mkdirp(dirName, function() {
+    mkdirp(dirName).then(function() {
+      done(dirName);
+    }).catch(function(err) {
       done(dirName);
     });
   }, 10);
