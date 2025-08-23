@@ -24,7 +24,7 @@
     "lint": "eslint .",
     "build": "npm run lint",
     "mocha": "mocha --bail --recursive tests/fixtures tests/specs",
-    "istanbul": "c8 --reporter=html --reporter=text --reports-dir=coverage/node mocha --bail --recursive tests/fixtures tests/specs",
+    "istanbul": "c8 --reporter=html --reporter=text --reports-dir=coverage/node mocha --recursive tests/fixtures tests/specs",
     "test": "npm run istanbul",
     "upgrade": "ncu \"/(!multer)/\" --upgradeAll && npm update",
     "bump": "bump --prerelease --tag --push --all",
@@ -47,7 +47,7 @@
     "mocha": "^10.8.2",
     "npm-check-updates": "^16.14.20",
     "sinon": "^1.16.1",
-    "supertest": "^1.2.0",
+    "supertest": "^7.1.4",
     "version-bump-prompt": "^1.5.1"
   },
   "dependencies": {

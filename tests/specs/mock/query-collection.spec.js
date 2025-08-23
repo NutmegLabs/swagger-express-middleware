@@ -25,6 +25,22 @@ function testCases (contentType, method) {
   var contentTypePattern = new RegExp('^' + contentType + '; charset=utf-8');
 
   var api, noBody, noHeaders;
+  
+  // Helper function to handle supertest 7.x HEAD/OPTIONS request body expectations
+  function expectResponse(request, status, body) {
+    if (noBody) {
+      // HEAD/OPTIONS requests: supertest 7.x returns undefined for body instead of ''
+      request.expect(status).expect(function(res) {
+        expect(res.body).to.satisfy(function(responseBody) {
+          return responseBody === undefined || responseBody === '' || responseBody === null || 
+                 (typeof responseBody === 'object' && responseBody !== null && Object.keys(responseBody).length === 0);
+        });
+      });
+    } else {
+      request.expect(status, body);
+    }
+  }
+  
   beforeEach(function () {
     api = _.cloneDeep(files.parsed.petStore);
     noBody = method === 'head' || method === 'options';
@@ -45,9 +61,19 @@ function testCases (contentType, method) {
     function (done) {
       helper.initTest(api, function (supertest) {
         var request = supertest[method]('/api/pets').set('Accept', contentType);
-        noHeaders || request.expect('Content-Length', 2);
+        noHeaders || request.expect('Content-Length', '2');
         noBody || request.expect('Content-Type', contentTypePattern);
-        request.expect(200, noBody ? '' : []);
+        if (noBody) {
+          // HEAD/OPTIONS requests: supertest 7.x returns undefined for body instead of ''
+          request.expect(200).expect(function(res) {
+            expect(res.body).to.satisfy(function(body) {
+              return body === undefined || body === '' || body === null || 
+                     (typeof body === 'object' && body !== null && Object.keys(body).length === 0);
+            });
+          });
+        } else {
+          request.expect(200, []);
+        }
         request.end(helper.checkResults(done));
       });
     }
@@ -60,9 +86,9 @@ function testCases (contentType, method) {
       dataStore.save(resource, function () {
         helper.initTest(dataStore, api, function (supertest) {
           var request = supertest[method]('/api/pets').set('Accept', contentType);
-          noHeaders || request.expect('Content-Length', 30);
+          noHeaders || request.expect('Content-Length', '30');
           noBody || request.expect('Content-Type', contentTypePattern);
-          request.expect(200, noBody ? '' : [{Name: 'Fido', Type: 'dog'}]);
+          expectResponse(request, 200, [{Name: 'Fido', Type: 'dog'}]);
           request.end(helper.checkResults(done));
         });
       });
@@ -76,9 +102,9 @@ function testCases (contentType, method) {
       dataStore.save(resource, function () {
         helper.initTest(dataStore, api, function (supertest) {
           var request = supertest[method]('/api/pets').set('Accept', contentType);
-          noHeaders || request.expect('Content-Length', 29);
+          noHeaders || request.expect('Content-Length', '29');
           noBody || request.expect('Content-Type', contentTypePattern);
-          request.expect(200, noBody ? '' : ['This is the root resource']);
+          expectResponse(request, 200, ['This is the root resource']);
           request.end(helper.checkResults(done));
         });
       });
@@ -94,9 +120,9 @@ function testCases (contentType, method) {
       dataStore.save(res1, res2, res3, function () {
         helper.initTest(dataStore, api, function (supertest) {
           var request = supertest[method]('/api/pets').set('Accept', contentType);
-          noHeaders || request.expect('Content-Length', 112);
+          noHeaders || request.expect('Content-Length', '112');
           noBody || request.expect('Content-Type', contentTypePattern);
-          request.expect(200, noBody ? '' : [
+          expectResponse(request, 200, [
             {Name: 'Fido', Type: 'dog'},
             'I am Fido',
             {
@@ -129,9 +155,9 @@ function testCases (contentType, method) {
       dataStore.save(res1, res2, res3, function () {
         helper.initTest(dataStore, api, function (supertest) {
           var request = supertest[method]('/api/pets').set('Accept', contentType);
-          noHeaders || request.expect('Content-Length', 157);
+          noHeaders || request.expect('Content-Length', '157');
           noBody || request.expect('Content-Type', contentTypePattern);
-          request.expect(200, noBody ? '' : {
+          expectResponse(request, 200, {
             code: 42,
             message: 'hello world',
             result: [
@@ -158,9 +184,9 @@ function testCases (contentType, method) {
       dataStore.save(res1, res2, res3, function () {
         helper.initTest(dataStore, api, function (supertest) {
           var request = supertest[method]('/api/pets').set('Accept', contentType);
-          noHeaders || request.expect('Content-Length', 89);
+          noHeaders || request.expect('Content-Length', '89');
           noBody || request.expect('Content-Type', contentTypePattern);
-          request.expect(200, noBody ? '' : [
+          expectResponse(request, 200, [
             {Name: 'Fido', Type: 'dog'},
             'This is the root resource',
             {Name: 'Polly', Type: 'bird'}
@@ -176,7 +202,7 @@ function testCases (contentType, method) {
       delete api.paths['/pets'][method].responses[200].schema;
       helper.initTest(api, function (supertest) {
         var request = supertest[method]('/api/pets').set('Accept', contentType);
-        request.expect(200, '');
+        expectResponse(request, 200, '');
         request.end(helper.checkResults(done, function (res) {
           expect(res.headers['content-length']).to.satisfy(function (contentLength) {
             // This is the difference between returning an empty array vs. nothing at all
@@ -197,9 +223,9 @@ function testCases (contentType, method) {
 
       helper.initTest(messWithTheBody, api, function (supertest) {
         var request = supertest[method]('/api/pets').set('Accept', contentType);
-        noHeaders || request.expect('Content-Length', 43);
+        noHeaders || request.expect('Content-Length', '43');
         noBody || request.expect('Content-Type', contentTypePattern);
-        request.expect(200, noBody ? '' : {message: 'Not the response you expected'});
+        expectResponse(request, 200, {message: 'Not the response you expected'});
         request.end(helper.checkResults(done));
       });
     }
@@ -211,9 +237,9 @@ function testCases (contentType, method) {
 
       helper.initTest(api, function (supertest) {
         var request = supertest[method]('/api/pets').set('Accept', contentType);
-        noHeaders || request.expect('Content-Length', 21);
+        noHeaders || request.expect('Content-Length', '21');
         noBody || request.expect('Content-Type', contentTypePattern);
-        request.expect(200, noBody ? '' : ['The default value']);
+        expectResponse(request, 200, ['The default value']);
         request.end(helper.checkResults(done));
       });
     }
@@ -225,9 +251,9 @@ function testCases (contentType, method) {
 
       helper.initTest(api, function (supertest) {
         var request = supertest[method]('/api/pets').set('Accept', contentType);
-        noHeaders || request.expect('Content-Length', 21);
+        noHeaders || request.expect('Content-Length', '21');
         noBody || request.expect('Content-Type', contentTypePattern);
-        request.expect(200, noBody ? '' : ['The example value']);
+        expectResponse(request, 200, ['The example value']);
         request.end(helper.checkResults(done));
       });
     }
@@ -243,7 +269,7 @@ function testCases (contentType, method) {
       helper.initTest(api, function (supertest) {// Wait 1 second, since the "Last-Modified" header is only precise to the second
         setTimeout(function () {
           var request = supertest[method]('/api/pets').set('Accept', contentType);
-          noHeaders || request.expect('Content-Length', 2);
+          noHeaders || request.expect('Content-Length', '2');
           noBody || request.expect('Content-Type', contentTypePattern);
           request.end(helper.checkResults(done, function (res) {
             if (!noHeaders) {
@@ -269,7 +295,7 @@ function testCases (contentType, method) {
         helper.initTest(dataStore, api, function (supertest) {// Wait 1 second, since the "Last-Modified" header is only precise to the second
           setTimeout(function () {
             var request = supertest[method]('/api/pets').set('Accept', contentType);
-            noHeaders || request.expect('Content-Length', 29);
+            noHeaders || request.expect('Content-Length', '29');
             noHeaders || request.expect('Last-Modified', util.rfc1123(resource.modifiedOn));
             noBody || request.expect('Content-Type', contentTypePattern);
             request.end(helper.checkResults(done));
@@ -301,7 +327,7 @@ function testCases (contentType, method) {
                 helper.initTest(dataStore, api, function (supertest) {
                   setTimeout(function () {
                     var request = supertest[method]('/api/pets').set('Accept', contentType);
-                    noHeaders || request.expect('Content-Length', 73);
+                    noHeaders || request.expect('Content-Length', '73');
                     noHeaders || request.expect('Last-Modified', util.rfc1123(resource1.modifiedOn));
                     noBody || request.expect('Content-Type', contentTypePattern);
                     request.end(helper.checkResults(done));
@@ -355,9 +381,9 @@ function testCases (contentType, method) {
           helper.initTest(dataStore, api, function (supertest) {
             var request = supertest[method]('/api/pets').set('Accept', contentType);
             noHeaders || request.expect('Content-Type', 'application/json; charset=utf-8');
-            noHeaders || request.expect('Content-Length', 13);
+            noHeaders || request.expect('Content-Length', '13');
             noBody || request.expect('Content-Type', contentTypePattern);
-            request.expect(200, noBody ? '' : ['I am Fido']);
+            expectResponse(request, 200, ['I am Fido']);
             request.end(helper.checkResults(done));
           });
         });
@@ -374,9 +400,9 @@ function testCases (contentType, method) {
           helper.initTest(dataStore, api, function (supertest) {
             var request = supertest[method]('/api/pets').set('Accept', contentType);
             noHeaders || request.expect('Content-Type', 'application/json; charset=utf-8');
-            noHeaders || request.expect('Content-Length', 4);
+            noHeaders || request.expect('Content-Length', '4');
             noBody || request.expect('Content-Type', contentTypePattern);
-            request.expect(200, noBody ? '' : ['']);
+            expectResponse(request, 200, ['']);
             request.end(helper.checkResults(done));
           });
         });
@@ -393,9 +419,9 @@ function testCases (contentType, method) {
           helper.initTest(dataStore, api, function (supertest) {
             var request = supertest[method]('/api/pets').set('Accept', contentType);
             noHeaders || request.expect('Content-Type', 'application/json; charset=utf-8');
-            noHeaders || request.expect('Content-Length', 8);
+            noHeaders || request.expect('Content-Length', '8');
             noBody || request.expect('Content-Type', contentTypePattern);
-            request.expect(200, noBody ? '' : [42.999]);
+            expectResponse(request, 200, [42.999]);
             request.end(helper.checkResults(done));
           });
         });
@@ -412,9 +438,9 @@ function testCases (contentType, method) {
           helper.initTest(dataStore, api, function (supertest) {
             var request = supertest[method]('/api/pets').set('Accept', contentType);
             noHeaders || request.expect('Content-Type', 'application/json; charset=utf-8');
-            noHeaders || request.expect('Content-Length', 14);
+            noHeaders || request.expect('Content-Length', '14');
             noBody || request.expect('Content-Type', contentTypePattern);
-            request.expect(200, noBody ? '' : ['2000-02-02']);
+            expectResponse(request, 200, ['2000-02-02']);
             request.end(helper.checkResults(done));
           });
         });
@@ -431,9 +457,9 @@ function testCases (contentType, method) {
           helper.initTest(dataStore, api, function (supertest) {
             var request = supertest[method]('/api/pets').set('Accept', contentType);
             noHeaders || request.expect('Content-Type', 'application/json; charset=utf-8');
-            noHeaders || request.expect('Content-Length', 28);
+            noHeaders || request.expect('Content-Length', '28');
             noBody || request.expect('Content-Type', contentTypePattern);
-            request.expect(200, noBody ? '' : ['2000-02-02T03:04:05.006Z']);
+            expectResponse(request, 200, ['2000-02-02T03:04:05.006Z']);
             request.end(helper.checkResults(done));
           });
         });
@@ -450,9 +476,9 @@ function testCases (contentType, method) {
           helper.initTest(dataStore, api, function (supertest) {
             var request = supertest[method]('/api/pets').set('Accept', contentType);
             noHeaders || request.expect('Content-Type', 'application/json; charset=utf-8');
-            noHeaders || request.expect('Content-Length', 15);
+            noHeaders || request.expect('Content-Length', '15');
             noBody || request.expect('Content-Type', contentTypePattern);
-            request.expect(200, noBody ? '' : ['hello world']);
+            expectResponse(request, 200, ['hello world']);
             request.end(helper.checkResults(done));
           });
         });
@@ -469,9 +495,9 @@ function testCases (contentType, method) {
           helper.initTest(dataStore, api, function (supertest) {
             var request = supertest[method]('/api/pets').set('Accept', contentType);
             noHeaders || request.expect('Content-Type', 'application/json; charset=utf-8');
-            noHeaders || request.expect('Content-Length', 71);
+            noHeaders || request.expect('Content-Length', '71');
             noBody || request.expect('Content-Type', contentTypePattern);
-            request.expect(200, noBody ? '' : [
+            expectResponse(request, 200, [
               {
                 type: 'Buffer',
                 data: [104, 101, 108, 108, 111, 32, 119, 111, 114, 108, 100]
@@ -493,9 +519,9 @@ function testCases (contentType, method) {
           helper.initTest(dataStore, api, function (supertest) {
             var request = supertest[method]('/api/pets').set('Accept', contentType);
             noHeaders || request.expect('Content-Type', 'application/json; charset=utf-8');
-            noHeaders || request.expect('Content-Length', 6);
+            noHeaders || request.expect('Content-Length', '6');
             noBody || request.expect('Content-Type', contentTypePattern);
-            request.expect(200, noBody ? '' : [null]);
+            expectResponse(request, 200, [null]);
             request.end(helper.checkResults(done));
           });
         });
@@ -520,7 +546,7 @@ function testCases (contentType, method) {
 
                 if (noBody) {
                   expect(res.body).to.be.empty;
-                  expect(res.text).to.be.empty;
+                  expect(res.text || '').to.be.empty;
                 }
                 else {
                   request.expect('Content-Type', contentTypePattern);
@@ -574,7 +600,7 @@ function testCases (contentType, method) {
 
                 if (noBody) {
                   expect(res.body).to.be.empty;
-                  expect(res.text).to.be.empty;
+                  expect(res.text || '').to.be.empty;
                 }
                 else {
                   // There's no such thing as an "array of files",
@@ -629,7 +655,7 @@ function testCases (contentType, method) {
 
                 if (noBody) {
                   expect(res.body).to.be.empty;
-                  expect(res.text).to.be.empty;
+                  expect(res.text || '').to.be.empty;
                 }
                 else {
                   // There's no such thing as an "array of files",
@@ -697,9 +723,9 @@ function testCases (contentType, method) {
       function (done) {
         helper.initTest(dataStore, api, function (supertest) {
           var request = supertest[method]('/api/pets?Type=cat').set('Accept', contentType);
-          noHeaders || request.expect('Content-Length', 350);
+          noHeaders || request.expect('Content-Length', '350');
           noBody || request.expect('Content-Type', contentTypePattern);
-          request.expect(200, noBody ? '' : [Fluffy, Garfield]);
+          expectResponse(request, 200, [Fluffy, Garfield]);
           request.end(helper.checkResults(done));
         });
       }
@@ -709,9 +735,9 @@ function testCases (contentType, method) {
       function (done) {
         helper.initTest(dataStore, api, function (supertest) {
           var request = supertest[method]('/api/pets?Age=4').set('Accept', contentType);
-          noHeaders || request.expect('Content-Length', 336);
+          noHeaders || request.expect('Content-Length', '336');
           noBody || request.expect('Content-Type', contentTypePattern);
-          request.expect(200, noBody ? '' : [Fido, Spot]);
+          expectResponse(request, 200, [Fido, Spot]);
           request.end(helper.checkResults(done));
         });
       }
@@ -721,9 +747,9 @@ function testCases (contentType, method) {
       function (done) {
         helper.initTest(dataStore, api, function (supertest) {
           var request = supertest[method]('/api/pets?Tags=big').set('Accept', contentType);
-          noHeaders || request.expect('Content-Length', 514);
+          noHeaders || request.expect('Content-Length', '514');
           noBody || request.expect('Content-Type', contentTypePattern);
-          request.expect(200, noBody ? '' : [Fido, Lassie, Spot]);
+          expectResponse(request, 200, [Fido, Lassie, Spot]);
           request.end(helper.checkResults(done));
         });
       }
@@ -733,9 +759,9 @@ function testCases (contentType, method) {
       function (done) {
         helper.initTest(dataStore, api, function (supertest) {
           var request = supertest[method]('/api/pets?Tags=big,brown').set('Accept', contentType);
-          noHeaders || request.expect('Content-Length', 346);
+          noHeaders || request.expect('Content-Length', '346');
           noBody || request.expect('Content-Type', contentTypePattern);
-          request.expect(200, noBody ? '' : [Fido, Lassie]);
+          expectResponse(request, 200, [Fido, Lassie]);
           request.end(helper.checkResults(done));
         });
       }
@@ -747,9 +773,9 @@ function testCases (contentType, method) {
 
         helper.initTest(dataStore, api, function (supertest) {
           var request = supertest[method]('/api/pets?Tags=big|brown').set('Accept', contentType);
-          noHeaders || request.expect('Content-Length', 346);
+          noHeaders || request.expect('Content-Length', '346');
           noBody || request.expect('Content-Type', contentTypePattern);
-          request.expect(200, noBody ? '' : [Fido, Lassie]);
+          expectResponse(request, 200, [Fido, Lassie]);
           request.end(helper.checkResults(done));
         });
       }
@@ -761,9 +787,9 @@ function testCases (contentType, method) {
 
         helper.initTest(dataStore, api, function (supertest) {
           var request = supertest[method]('/api/pets?Tags=big%20brown').set('Accept', contentType);
-          noHeaders || request.expect('Content-Length', 346);
+          noHeaders || request.expect('Content-Length', '346');
           noBody || request.expect('Content-Type', contentTypePattern);
-          request.expect(200, noBody ? '' : [Fido, Lassie]);
+          expectResponse(request, 200, [Fido, Lassie]);
           request.end(helper.checkResults(done));
         });
       }
@@ -773,9 +799,9 @@ function testCases (contentType, method) {
       function (done) {
         helper.initTest(dataStore, api, function (supertest) {
           var request = supertest[method]('/api/pets?Tags=big&Tags=brown').set('Accept', contentType);
-          noHeaders || request.expect('Content-Length', 346);
+          noHeaders || request.expect('Content-Length', '346');
           noBody || request.expect('Content-Type', contentTypePattern);
-          request.expect(200, noBody ? '' : [Fido, Lassie]);
+          expectResponse(request, 200, [Fido, Lassie]);
           request.end(helper.checkResults(done));
         });
       }
@@ -785,9 +811,9 @@ function testCases (contentType, method) {
       function (done) {
         helper.initTest(dataStore, api, function (supertest) {
           var request = supertest[method]('/api/pets?Age=7&Type=cat&Tags=orange').set('Accept', contentType);
-          noHeaders || request.expect('Content-Length', 172);
+          noHeaders || request.expect('Content-Length', '172');
           noBody || request.expect('Content-Type', contentTypePattern);
-          request.expect(200, noBody ? '' : [Garfield]);
+          expectResponse(request, 200, [Garfield]);
           request.end(helper.checkResults(done));
         });
       }
@@ -797,9 +823,9 @@ function testCases (contentType, method) {
       function (done) {
         helper.initTest(dataStore, api, function (supertest) {
           var request = supertest[method]('/api/pets?Vet.Address.State=NY').set('Accept', contentType);
-          noHeaders || request.expect('Content-Length', 687);
+          noHeaders || request.expect('Content-Length', '687');
           noBody || request.expect('Content-Type', contentTypePattern);
-          request.expect(200, noBody ? '' : [Fido, Polly, Lassie, Garfield]);
+          expectResponse(request, 200, [Fido, Polly, Lassie, Garfield]);
           request.end(helper.checkResults(done));
         });
       }
@@ -809,9 +835,9 @@ function testCases (contentType, method) {
       function (done) {
         helper.initTest(dataStore, api, function (supertest) {
           var request = supertest[method]('/api/pets?Vet.Address.State=NY&Vet.Address.City=New%20York').set('Accept', contentType);
-          noHeaders || request.expect('Content-Length', 509);
+          noHeaders || request.expect('Content-Length', '509');
           noBody || request.expect('Content-Type', contentTypePattern);
-          request.expect(200, noBody ? '' : [Fido, Polly, Garfield]);
+          expectResponse(request, 200, [Fido, Polly, Garfield]);
           request.end(helper.checkResults(done));
         });
       }
@@ -821,9 +847,9 @@ function testCases (contentType, method) {
       function (done) {
         helper.initTest(dataStore, api, function (supertest) {
           var request = supertest[method]('/api/pets?Name=Lassie&Vet.Address.Street=123%20First%20St.').set('Accept', contentType);
-          noHeaders || request.expect('Content-Length', 1033);
+          noHeaders || request.expect('Content-Length', '1033');
           noBody || request.expect('Content-Type', contentTypePattern);
-          request.expect(200, noBody ? '' : allPets);
+          expectResponse(request, 200, allPets);
           request.end(helper.checkResults(done));
         });
       }
@@ -833,9 +859,9 @@ function testCases (contentType, method) {
       function (done) {
         helper.initTest(dataStore, api, function (supertest) {
             var request = supertest[method]('/api/pets?Age=4&Name=Lassie&Vet.Name=Vet%202&Vet.Address.Street=123%20First%20St.').set('Accept', contentType);
-            noHeaders || request.expect('Content-Length', 169);
+            noHeaders || request.expect('Content-Length', '169');
             noBody || request.expect('Content-Type', contentTypePattern);
-            request.expect(200, noBody ? '' : [Spot]);
+            expectResponse(request, 200, [Spot]);
             request.end(helper.checkResults(done));
           }
         );

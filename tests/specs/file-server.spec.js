@@ -6,6 +6,23 @@ var swagger = require('../../'),
     fs      = require('fs'),
     isHead;
 
+// Helper function to handle HEAD request body expectations
+// HEAD requests should have no body (undefined, empty string, empty object, or null in various supertest versions)
+function expectBody(content) {
+  return function(res) {
+    if (isHead) {
+      // In supertest 7.x, HEAD requests return res.body as {} instead of undefined or ''
+      // We need to accept undefined, '', null, or empty object {}
+      expect(res.body).to.satisfy(function(body) {
+        return body === undefined || body === '' || body === null || 
+               (typeof body === 'object' && body !== null && Object.keys(body).length === 0);
+      }, 'HEAD request should have no body (undefined, empty string, null, or empty object)');
+    } else {
+      expect(res.body).to.deep.equal(content);
+    }
+  };
+}
+
 describe('FileServer middleware', function() {
   ['head', 'get'].forEach(function(method) {
     describe(method.toUpperCase(), function() {
@@ -24,7 +41,7 @@ describe('FileServer middleware', function() {
               helper.supertest(express)
                 [method]('/api-docs')
                 .expect('Content-Type', 'application/json; charset=utf-8')
-                .expect(isHead ? '' : files.parsed.petStore)
+                .expect(expectBody(files.parsed.petStore))
                 .end(helper.checkResults(done));
             });
           }
@@ -64,7 +81,7 @@ describe('FileServer middleware', function() {
               helper.supertest(express)
                 [method]('/my/custom/path')
                 .expect('Content-Type', 'application/json; charset=utf-8')
-                .expect(isHead ? '' : files.parsed.petStore)
+                .expect(expectBody(files.parsed.petStore))
                 .end(helper.checkResults(done));
             });
           }
@@ -78,7 +95,7 @@ describe('FileServer middleware', function() {
               helper.supertest(express)
                 [method]('/my/custom/path')
                 .expect('Content-Type', 'application/json; charset=utf-8')
-                .expect(isHead ? '' : files.parsed.petStore)
+                .expect(expectBody(files.parsed.petStore))
                 .end(helper.checkResults(done));
             });
           }
@@ -104,7 +121,7 @@ describe('FileServer middleware', function() {
               helper.supertest(express)
                 [method]('/api/api-docs/')
                 .expect('Content-Type', 'application/json; charset=utf-8')
-                .expect(isHead ? '' : files.parsed.petStore)
+                .expect(expectBody(files.parsed.petStore))
                 .end(helper.checkResults(done));
             });
           }
@@ -118,7 +135,7 @@ describe('FileServer middleware', function() {
               helper.supertest(express)
                 [method]('/api/my/custom/path/')
                 .expect('Content-Type', 'application/json; charset=utf-8')
-                .expect(isHead ? '' : files.parsed.petStore)
+                .expect(expectBody(files.parsed.petStore))
                 .end(helper.checkResults(done));
             });
           }
@@ -132,13 +149,13 @@ describe('FileServer middleware', function() {
               helper.supertest(express)
                 [method]('/api-docs/')                                          // <-- trailing slash
                 .expect('Content-Type', 'application/json; charset=utf-8')
-                .expect(isHead ? '' : files.parsed.petStore)
+                .expect(expectBody(files.parsed.petStore))
                 .end(helper.checkResults(done, function() {
 
                   helper.supertest(express)
                     [method]('/api-docs')                                   // <-- no trailing slash
                     .expect('Content-Type', 'application/json; charset=utf-8')
-                    .expect(isHead ? '' : files.parsed.petStore)
+                    .expect(expectBody(files.parsed.petStore))
                     .end(helper.checkResults(done));
                 }));
             });
@@ -164,7 +181,7 @@ describe('FileServer middleware', function() {
                   helper.supertest(express)
                     [method]('/api-docs')
                     .expect('Content-Type', 'application/json; charset=utf-8')
-                    .expect(isHead ? '' : files.parsed.petStore)
+                    .expect(expectBody(files.parsed.petStore))
                     .end(helper.checkResults(done));
                 })
             });
@@ -190,7 +207,7 @@ describe('FileServer middleware', function() {
                   helper.supertest(express)
                     [method]('/API-docs')
                     .expect('Content-Type', 'application/json; charset=utf-8')
-                    .expect(isHead ? '' : files.parsed.petStore)
+                    .expect(expectBody(files.parsed.petStore))
                     .end(helper.checkResults(done));
                 })
             });
@@ -219,7 +236,7 @@ describe('FileServer middleware', function() {
                   helper.supertest(express)
                     [method]('/API/Custom/Path.json/')
                     .expect('Content-Type', 'application/json; charset=utf-8')
-                    .expect(isHead ? '' : files.parsed.petStore)
+                    .expect(expectBody(files.parsed.petStore))
                     .end(helper.checkResults(done));
                 })
             });
@@ -243,7 +260,7 @@ describe('FileServer middleware', function() {
               helper.supertest(express)
                 [method]('/API/Custom/Path.json/')
                 .expect('Content-Type', 'application/json; charset=utf-8')
-                .expect(isHead ? '' : files.parsed.petStore)
+                .expect(expectBody(files.parsed.petStore))
                 .end(helper.checkResults(done));
             });
           }
@@ -257,7 +274,8 @@ describe('FileServer middleware', function() {
               helper.supertest(express)
                 [method]('/api-docs')
                 .expect('Content-Type', 'application/json; charset=utf-8')
-                .expect(500, isHead ? '' : {})
+                .expect(500)
+                .expect(expectBody({}))
                 .end(done);
             });
           }
@@ -324,7 +342,11 @@ describe('FileServer middleware', function() {
                 expect(res.body).to.have.lengthOf(0);
               }
               else {
-                expect(res.body).to.be.empty;
+                // supertest 7.x returns {} for HEAD request bodies instead of empty string
+                expect(res.body).to.satisfy(function(body) {
+                  return body === undefined || body === '' || body === null || 
+                         (typeof body === 'object' && body !== null && Object.keys(body).length === 0);
+                }, 'HEAD request should have no body (undefined, empty string, null, or empty object)');
               }
               expect(res.text || '').to.be.empty;
             }
