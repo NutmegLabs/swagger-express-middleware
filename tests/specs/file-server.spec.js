@@ -326,11 +326,11 @@ describe('FileServer middleware', function() {
               else {
                 expect(res.body).to.be.empty;
               }
-              expect(res.text).to.be.empty;
+              expect(res.text || '').to.be.empty;
             }
             else {
               var rawFile = fs.readFileSync(file);
-              expect(new Buffer(res.text || res.body)).to.deep.equal(rawFile);
+              expect(Buffer.from(res.text || res.body)).to.deep.equal(rawFile);
             }
 
             return false;

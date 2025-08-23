@@ -467,8 +467,8 @@ describe('Query Resource Mock', function() {
                   noHeaders || request.expect('Content-Type', 'application/json; charset=utf-8');
                   request.end(helper.checkResults(done, function(res2) {
                     if (noBody) {
-                      expect(res2.body).to.be.empty;
-                      expect(res2.text).to.be.empty;
+                      expect(res2.body || '').to.be.empty;
+                      expect(res2.text || '').to.be.empty;
                     }
                     else {
                       expect(res2.body).to.deep.equal({
@@ -513,11 +513,11 @@ describe('Query Resource Mock', function() {
                     expect(res2.headers['content-disposition']).to.be.undefined;
 
                     if (noBody) {
-                      expect(res2.body).to.be.empty;
-                      expect(res2.text).to.be.empty;
+                      expect(res2.body || '').to.be.empty;
+                      expect(res2.text || '').to.be.empty;
                     }
                     else {
-                      expect(res2.body).to.be.empty;
+                      expect(res2.body || '').to.be.empty;
                       expect(res2.text).to.have.length.at.least(255063).and.at.most(258441);  // CRLF vs LF
                     }
                     done();
@@ -553,11 +553,11 @@ describe('Query Resource Mock', function() {
 
                   request.end(helper.checkResults(done, function(res2) {
                     if (noBody) {
-                      expect(res2.body).to.be.empty;
-                      expect(res2.text).to.be.empty;
+                      expect(res2.body || '').to.be.empty;
+                      expect(res2.text || '').to.be.empty;
                     }
                     else {
-                      expect(res2.body).to.be.empty;
+                      expect(res2.body || '').to.be.empty;
                       expect(res2.text).to.have.length.at.least(87).and.at.most(95);  // CRLF vs LF
                     }
                     done();
@@ -592,11 +592,11 @@ describe('Query Resource Mock', function() {
 
                   request.end(helper.checkResults(done, function(res2) {
                     if (noBody) {
-                      expect(res2.body).to.be.empty;
-                      expect(res2.text).to.be.empty;
+                      expect(res2.body || '').to.be.empty;
+                      expect(res2.text || '').to.be.empty;
                     }
                     else {
-                      expect(res2.body).to.be.empty;
+                      expect(res2.body || '').to.be.empty;
                       expect(res2.text).to.have.length.at.least(255063).and.at.most(258441);  // CRLF vs LF
                     }
                     done();
@@ -633,10 +633,10 @@ describe('Query Resource Mock', function() {
 
                     request.end(helper.checkResults(done, function(res2) {
                       if (noBody) {
-                        expect(res2.text).to.be.empty;
+                        expect(res2.text || '').to.be.empty;
 
                         if (method === 'options') {
-                          expect(res2.body).to.be.empty;
+                          expect(res2.body || '').to.be.empty;
                         }
                         else {
                           expect(res2.body).to.be.an.instanceOf(Buffer).with.lengthOf(0);
