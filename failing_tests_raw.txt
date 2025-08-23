@@ -1,0 +1,746 @@
+        ✔ should use strict, case-sensitive routing, and a custom URL
+        ✔ should use routing options instead of the Express app's settings
+        1) should return an HTTP 500 if the Swagger API is invalid
+        ✔ should not respond to POST requests
+        ✔ should not respond to PUT requests
+        ✔ should not respond to PATCH requests
+        ✔ should not respond to DELETE requests
+      raw Swagger files
+        ✔ should serve the raw Swagger file
+        ✔ should serve a referenced file in the same directory as the main Swagger file
+        ✔ should serve a referenced file in a subdirectory of the main Swagger file
+        ✔ should serve a referenced file in a parent directory of the main Swagger file
+        ✔ should serve a referenced file in a parent directory of the main Swagger file
+--
+        ✔ should use strict, case-sensitive routing, and a custom URL
+        ✔ should use routing options instead of the Express app's settings
+        2) should return an HTTP 500 if the Swagger API is invalid
+        ✔ should not respond to POST requests
+        ✔ should not respond to PUT requests
+        ✔ should not respond to PATCH requests
+        ✔ should not respond to DELETE requests
+      raw Swagger files
+        ✔ should serve the raw Swagger file
+        ✔ should serve a referenced file in the same directory as the main Swagger file
+        ✔ should serve a referenced file in a subdirectory of the main Swagger file
+        ✔ should serve a referenced file in a parent directory of the main Swagger file
+        ✔ should serve a referenced file in a parent directory of the main Swagger file
+--
+    ✔ should parse large file params if there is no maxLength
+    ✔ should parse empty file params if there is no minLength
+    3) should parse an optional, unspecified file param
+    4) should parse the default File value if no value is specified
+    ✔ should throw an error if the file is smaller than the minLength
+    ✔ should throw an HTTP 413 error if the file is larger than the maxLength
+    ✔ should throw an error if the minLength is invalid
+    ✔ should throw an error if the maxLength is invalid
+    5) should throw an error if required and not specified
+    6) should throw an error if the value is not a file
+
+  JSON Schema - parse integer params
+    ✔ should parse a valid integer param
+    ✔ should parse an optional, unspecified integer param
+    ✔ should parse the default value if no value is specified
+    ✔ should parse the default value if the specified value is blank
+    ✔ should throw an error if the value is blank
+    ✔ should throw an error if the value is not a valid integer
+    ✔ should throw an error if the value is a float
+    ✔ should throw an error if the value fails schema validation
+--
+    ✔ should parse the default String value if no value is specified
+    ✔ should parse the default value if the specified value is blank
+    7) should throw an error if the value is blank
+    ✔ should throw an error if schema validation fails
+    ✔ should throw an error if required and not specified
+
+  JSON Schema sample data
+    sampleNumber
+      ✔ should generate a valid number
+      ✔ should generate a valid float
+      ✔ should generate a valid double
+      ✔ should generate a valid number within min/max
+      ✔ should generate a valid number within exclusive min/max
+--
+        ✔ should delete an undefined value
+        ✔ should delete a null value
+        8) should delete multipart/form-data
+        9) should delete a file
+        10) should delete a file attachment
+      filter
+        ✔ should filter by a string property
+        ✔ should filter by a numeric property
+        ✔ should filter by an array property (single value)
+        ✔ should filter by an array property (multiple values, comma-separated)
+        ✔ should filter by an array property (multiple values, pipe-separated)
+        ✔ should filter by an array property (multiple values, space-separated)
+        ✔ should filter by an array property (multiple values, repeated)
+        ✔ should filter by multiple properties
+        ✔ should filter by a deep property
+--
+        ✔ should return an undefined value
+        ✔ should return a null value
+        11) should return multipart/form-data
+        ✔ should return a file
+        ✔ should return a file attachment
+
+  Edit Collection Mock
+    PATCH
+      Shared tests
+        ✔ should add a new resource to the collection
+        ✔ should add multiple resources to the collection
+        ✔ should add zero resources to the collection
+        ✔ should not return data if not specified in the Swagger API
+--
+        ✔ should support Buffers (as a string)
+        ✔ should support Buffers (as JSON)
+        12) should support undefined values
+        13) should support multipart/form-data
+        ✔ should support files
+      Determining resource names (by property names)
+        ✔ should determine the resource name from "Name" properties in its schema
+        ✔ should determine the resource name from "Name" properties in its schema, even if they're not present in the data
+        - should determine the resource name from "Name" properties in its data, even if they're not in the schema
+        ✔ should use a "byte" property in the schema as the resource name
+        ✔ should use a "boolean" property in the schema as the resource name
+        - should use a "boolean" property in the data as the resource name
+        ✔ should use a "date" property in the schema as the resource name
+        ✔ should use a "date-time" property in the schema as the resource name
+--
+      Determining resource names (by file name)
+        ✔ should use the client-side file name as the resource name
+        14) should use the server-side file name as the resource name
+        ✔ should use an auto-generated resource name if no file was uploaded
+        15) should use an auto-generated resource name if the body is empty
+        ✔ should use an auto-generated resource name if there is more than one file param
+      Auto-generated resource names
+        ✔ should generate a unique ID if no "Name" property can be determined
+        ✔ should generate a string value for the resource's "Name" property, if not set
+        ✔ should generate a string value for the resource's "Name" property, even if the body is empty
+        ✔ should generate an integer value for the resource's "Name" property, if not set
+        ✔ should generate a date value for the resource's "Name" property, if not set
+        ✔ should generate a date-time value for the resource's "Name" property, if not set
+        ✔ should NOT generate an array value for the resource's "Name" property, if not set
+    PUT
+--
+        ✔ should support Buffers (as a string)
+        ✔ should support Buffers (as JSON)
+        16) should support undefined values
+        17) should support multipart/form-data
+        ✔ should support files
+      Determining resource names (by property names)
+        ✔ should determine the resource name from "Name" properties in its schema
+        ✔ should determine the resource name from "Name" properties in its schema, even if they're not present in the data
+        - should determine the resource name from "Name" properties in its data, even if they're not in the schema
+        ✔ should use a "byte" property in the schema as the resource name
+        ✔ should use a "boolean" property in the schema as the resource name
+        - should use a "boolean" property in the data as the resource name
+        ✔ should use a "date" property in the schema as the resource name
+        ✔ should use a "date-time" property in the schema as the resource name
+--
+      Determining resource names (by file name)
+        ✔ should use the client-side file name as the resource name
+        18) should use the server-side file name as the resource name
+        ✔ should use an auto-generated resource name if no file was uploaded
+        19) should use an auto-generated resource name if the body is empty
+        ✔ should use an auto-generated resource name if there is more than one file param
+      Auto-generated resource names
+        ✔ should generate a unique ID if no "Name" property can be determined
+        ✔ should generate a string value for the resource's "Name" property, if not set
+        ✔ should generate a string value for the resource's "Name" property, even if the body is empty
+        ✔ should generate an integer value for the resource's "Name" property, if not set
+        ✔ should generate a date value for the resource's "Name" property, if not set
+        ✔ should generate a date-time value for the resource's "Name" property, if not set
+        ✔ should NOT generate an array value for the resource's "Name" property, if not set
+    POST
+--
+        ✔ should support Buffers (as a string)
+        ✔ should support Buffers (as JSON)
+        20) should support undefined values
+        21) should support multipart/form-data
+        ✔ should support files
+      Determining resource names (by property names)
+        ✔ should determine the resource name from "Name" properties in its schema
+        ✔ should determine the resource name from "Name" properties in its schema, even if they're not present in the data
+        - should determine the resource name from "Name" properties in its data, even if they're not in the schema
+        ✔ should use a "byte" property in the schema as the resource name
+        ✔ should use a "boolean" property in the schema as the resource name
+        - should use a "boolean" property in the data as the resource name
+        ✔ should use a "date" property in the schema as the resource name
+        ✔ should use a "date-time" property in the schema as the resource name
+--
+      Determining resource names (by file name)
+        ✔ should use the client-side file name as the resource name
+        22) should use the server-side file name as the resource name
+        ✔ should use an auto-generated resource name if no file was uploaded
+        23) should use an auto-generated resource name if the body is empty
+        ✔ should use an auto-generated resource name if there is more than one file param
+      Auto-generated resource names
+        ✔ should generate a unique ID if no "Name" property can be determined
+        ✔ should generate a string value for the resource's "Name" property, if not set
+        ✔ should generate a string value for the resource's "Name" property, even if the body is empty
+        ✔ should generate an integer value for the resource's "Name" property, if not set
+        ✔ should generate a date value for the resource's "Name" property, if not set
+        ✔ should generate a date-time value for the resource's "Name" property, if not set
+        ✔ should NOT generate an array value for the resource's "Name" property, if not set
+
+--
+        ✔ should return a Buffer (as JSON)
+        ✔ should return an undefined value
+        24) should return multipart/form-data
+        ✔ should return a file
+        ✔ should return a file attachment
+      PUT tests
+        ✔ should overwrite the existing resource rather than merging it
+        ✔ should return a 500 error if a DataStore error occurs
+    PATCH
+      Shared tests
+        ✔ should create a new resource
+        ✔ should create a new resource at the specified URL, even if the primary key is different
+        ✔ should create a new resource using default value in the JSON schema
+--
+        ✔ should return a Buffer (as JSON)
+        ✔ should return an undefined value
+        25) should return multipart/form-data
+        ✔ should return a file
+        ✔ should return a file attachment
+      PATCH/POST tests
+        ✔ should merge the new resource with the existing resource
+    POST
+      Shared tests
+        ✔ should create a new resource
+        ✔ should create a new resource at the specified URL, even if the primary key is different
+        ✔ should create a new resource using default value in the JSON schema
+        ✔ should create a new resource using default property values in the JSON schema
+--
+        ✔ should return a Buffer (as JSON)
+        ✔ should return an undefined value
+        26) should return multipart/form-data
+        ✔ should return a file
+        ✔ should return a file attachment
+      PATCH/POST tests
+        ✔ should merge the new resource with the existing resource
+
+  Mock middleware
+    ✔ should do nothing if no other middleware is used
+    ✔ should do nothing if the Metadata middleware is not used
+    ✔ should do nothing if the API is not valid
+    ✔ should do nothing if "mock" is disabled in Express
+--
+          ✔ should return a Buffer (as JSON)
+          ✔ should return a null value
+          27) should return multipart/form-data
+          28) should return a file
+          29) should return a file attachment
+        filter
+          ✔ should filter by a string property
+          ✔ should filter by a numeric property
+          ✔ should filter by an array property (single value)
+          ✔ should filter by an array property (multiple values, comma-separated)
+          ✔ should filter by an array property (multiple values, pipe-separated)
+          ✔ should filter by an array property (multiple values, space-separated)
+          ✔ should filter by an array property (multiple values, repeated)
+          ✔ should filter by multiple properties
+          ✔ should filter by a deep property
+--
+        - should return the example value instead of undefined
+        ✔ should return a null value
+        30) should return multipart/form-data
+        ✔ should return a file
+        ✔ should return a file attachment (using the basename of the URL)
+        ✔ should return a file attachment (using the default filename in the Swagger API)
+        ✔ should return a file attachment (using the basename of the URL when there's no default filename in the Swagger API)
+
+  Mock response headers
+    ✔ should set headers to the default values specified in the Swagger API
+    ✔ should not override headers that were already set by other middleware
+    ✔ should generate sample values for headers that have no values
+    Location header
+--
+      ✔ should set formData params to their defaults if unspecified
+      ✔ should throw an error if formData params are invalid
+      31) should parse file params
+    Body param parser
+      ✔ should parse the body param
+      ✔ should validate a non-JSON body param, if third-party parsing middleware is used
+      ✔ should validate a non-object body param
+      ✔ should set the body to undefined if optional and unspecified
+      ✔ should set the body to its default if optional and unspecified
+      ✔ should throw an error if the body param is required and unspecified
+      ✔ should throw an error if the body param is required and unspecified, even if there's a default value
+      ✔ should throw an error if the body param is invalid
+
+--
+      ✔ can be modified to accept other content types
+    Multipart form data parser
+      32) should parse simple fields
+      - should parse file attachments
+      - should parse a mix of fields and file attachments
+      33) should support large file attachments by default
+
+  RequestValidator middleware
+    ✔ all validations should pass if no other middleware is used
+    ✔ all validations should pass if the API is valid
+    ✔ all validations should pass if the request is outside of the API's basePath
+    ✔ should throw an error if the API is invalid
+    ✔ should clear the error if the API becomes valid
+    ✔ should throw an HTTP 404 if the path is invalid
+    ✔ should throw an HTTP 404 if the Paths object is empty
+    ✔ should throw an HTTP 405 if the method is not allowed
+--
+  33 failing
+
+  1) FileServer middleware
+       HEAD
+         dereferenced JSON file
+           should return an HTTP 500 if the Swagger API is invalid:
+     Uncaught TypeError: Cannot read properties of null (reading '$refs')
+      at fileServer (lib/file-server.js:25:55)
+      at Middleware.files (lib/middleware.js:109:12)
+      at /Users/andrewspencer/react/swagger-express-middleware/tests/specs/file-server.spec.js:272:55
+      at /Users/andrewspencer/react/swagger-express-middleware/lib/middleware.js:65:11
+      at /Users/andrewspencer/react/swagger-express-middleware/node_modules/call-me-maybe/src/maybe.js:11:28
+      at process.processTicksAndRejections (node:internal/process/task_queues:77:11)
+
+  2) FileServer middleware
+       GET
+         dereferenced JSON file
+           should return an HTTP 500 if the Swagger API is invalid:
+     Uncaught TypeError: Cannot read properties of null (reading '$refs')
+      at fileServer (lib/file-server.js:25:55)
+      at Middleware.files (lib/middleware.js:109:12)
+      at /Users/andrewspencer/react/swagger-express-middleware/tests/specs/file-server.spec.js:272:55
+      at /Users/andrewspencer/react/swagger-express-middleware/lib/middleware.js:65:11
+      at /Users/andrewspencer/react/swagger-express-middleware/node_modules/call-me-maybe/src/maybe.js:11:28
+      at process.processTicksAndRejections (node:internal/process/task_queues:77:11)
+
+  3) JSON Schema - parse file params
+       should parse an optional, unspecified file param:
+     cannot POST /api/pets/fido/photos (500)<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Error</title>
+</head>
+<body>
+<pre>TypeError: Cannot read properties of undefined (reading 'Photo')
+    at /Users/andrewspencer/react/swagger-express-middleware/lib/param-parser.js:59:64
+--
+      at process.processTicksAndRejections (node:internal/process/task_queues:81:21)
+
+  4) JSON Schema - parse file params
+       should parse the default File value if no value is specified:
+     cannot POST /api/pets/fido/photos (500)<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Error</title>
+</head>
+<body>
+<pre>TypeError: Cannot read properties of undefined (reading 'Photo')
+    at /Users/andrewspencer/react/swagger-express-middleware/lib/param-parser.js:59:64
+--
+      at process.processTicksAndRejections (node:internal/process/task_queues:81:21)
+
+  5) JSON Schema - parse file params
+       should throw an error if required and not specified:
+     AssertionError: expected undefined to equal 400
+      at /Users/andrewspencer/react/swagger-express-middleware/tests/specs/json-schema/parse/parse-file.spec.js:204:33
+      at tryCatch (tests/fixtures/helper.js:87:9)
+      at /Users/andrewspencer/react/swagger-express-middleware/tests/fixtures/helper.js:74:7
+      at Layer.handle_error (node_modules/express/lib/router/layer.js:71:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:326:13)
+      at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+--
+      at HTTPParser.parserOnHeadersComplete (node:_http_common:119:17)
+
+  6) JSON Schema - parse file params
+       should throw an error if the value is not a file:
+     AssertionError: expected undefined to equal 400
+      at /Users/andrewspencer/react/swagger-express-middleware/tests/specs/json-schema/parse/parse-file.spec.js:225:33
+      at tryCatch (tests/fixtures/helper.js:87:9)
+      at /Users/andrewspencer/react/swagger-express-middleware/tests/fixtures/helper.js:74:7
+      at Layer.handle_error (node_modules/express/lib/router/layer.js:71:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:326:13)
+      at /Users/andrewspencer/react/swagger-express-middleware/node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+--
+      at HTTPParser.parserOnHeadersComplete (node:_http_common:119:17)
+
+  7) JSON Schema - parse object params
+       should throw an error if the value is blank:
+     Error: cannot PATCH /api/pets/fido (404)<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Error</title>
+</head>
+<body>
+<pre>Cannot PATCH /api/pets/fido</pre>
+</body>
+--
+      at process.processTicksAndRejections (node:internal/process/task_queues:81:21)
+
+  8) Query Collection Mock
+       DELETE
+         different data types
+           should delete multipart/form-data:
+
+      Uncaught AssertionError: expected [ { Label: 'Photo 1', …(3) } ] to deeply equal [ { ID: 523316828, …(3) } ]
+      + expected - actual
+
+           "ID": 523316828
+           "Label": "Photo 1"
+           "Photo": {
+--
+      at process.processTicksAndRejections (node:internal/process/task_queues:81:21)
+
+  9) Query Collection Mock
+       DELETE
+         different data types
+           should delete a file:
+
+      Uncaught AssertionError: expected [ { fieldname: 'Photo', …(11) } ] to deeply equal [ { fieldname: 'Photo', …(9) } ]
+      + expected - actual
+
+       [
+         {
+           "buffer": [null]
+--
+      at process.processTicksAndRejections (node:internal/process/task_queues:81:21)
+
+  10) Query Collection Mock
+       DELETE
+         different data types
+           should delete a file attachment:
+
+      Uncaught AssertionError: expected [ { fieldname: 'Photo', …(11) } ] to deeply equal [ { fieldname: 'Photo', …(9) } ]
+      + expected - actual
+
+       [
+         {
+           "buffer": [null]
+--
+      at process.processTicksAndRejections (node:internal/process/task_queues:81:21)
+
+  11) Edit Resource Mock
+       DELETE
+         different data types
+           should return multipart/form-data:
+
+      Uncaught AssertionError: expected { Label: 'Photo 1', …(3) } to deeply equal { ID: 1158925221, …(3) }
+      + expected - actual
+
+         "ID": 1158925221
+         "Label": "Photo 1"
+         "Photo": {
+--
+      at process.processTicksAndRejections (node:internal/process/task_queues:81:21)
+
+  12) Edit Collection Mock
+       PATCH
+         Determining resource names (by data type)
+           should support undefined values:
+
+      Error: expected '' response body, got '""'
+      + expected - actual
+
+
+      at /Users/andrewspencer/react/swagger-express-middleware/tests/specs/mock/edit-collection.spec.js:564:18
+      at /Users/andrewspencer/react/swagger-express-middleware/tests/specs/mock/helper.js:66:5
+--
+      at process.processTicksAndRejections (node:internal/process/task_queues:81:21)
+
+  13) Edit Collection Mock
+       PATCH
+         Determining resource names (by data type)
+           should support multipart/form-data:
+
+      Uncaught AssertionError: expected { Label: 'Photo 1', …(3) } to deeply equal { ID: 1731877733, …(3) }
+      + expected - actual
+
+         "ID": 1731877733
+         "Label": "Photo 1"
+         "Photo": {
+--
+      at process.processTicksAndRejections (node:internal/process/task_queues:81:21)
+
+  14) Edit Collection Mock
+       PATCH
+         Determining resource names (by file name)
+           should use the server-side file name as the resource name:
+
+      Uncaught AssertionError: expected '/api/pets/Fido/photos/1MB.jpg' to not equal '/api/pets/Fido/photos/1MB.jpg'
+      + expected - actual
+
+
+      at /Users/andrewspencer/react/swagger-express-middleware/tests/specs/mock/edit-collection.spec.js:978:55
+      at Test.<anonymous> (tests/fixtures/helper.js:159:9)
+--
+      at process.processTicksAndRejections (node:internal/process/task_queues:81:21)
+
+  15) Edit Collection Mock
+       PATCH
+         Determining resource names (by file name)
+           should use an auto-generated resource name if the body is empty:
+     cannot PATCH /api/pets/Fido/photos (500)<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Error</title>
+</head>
+<body>
+--
+      at process.processTicksAndRejections (node:internal/process/task_queues:81:21)
+
+  16) Edit Collection Mock
+       PUT
+         Determining resource names (by data type)
+           should support undefined values:
+
+      Error: expected '' response body, got '""'
+      + expected - actual
+
+
+      at /Users/andrewspencer/react/swagger-express-middleware/tests/specs/mock/edit-collection.spec.js:564:18
+      at /Users/andrewspencer/react/swagger-express-middleware/tests/specs/mock/helper.js:66:5
+--
+      at process.processTicksAndRejections (node:internal/process/task_queues:81:21)
+
+  17) Edit Collection Mock
+       PUT
+         Determining resource names (by data type)
+           should support multipart/form-data:
+
+      Uncaught AssertionError: expected { Label: 'Photo 1', …(3) } to deeply equal { ID: 1755861460, …(3) }
+      + expected - actual
+
+         "ID": 1755861460
+         "Label": "Photo 1"
+         "Photo": {
+--
+      at process.processTicksAndRejections (node:internal/process/task_queues:81:21)
+
+  18) Edit Collection Mock
+       PUT
+         Determining resource names (by file name)
+           should use the server-side file name as the resource name:
+
+      Uncaught AssertionError: expected '/api/pets/Fido/photos/1MB.jpg' to not equal '/api/pets/Fido/photos/1MB.jpg'
+      + expected - actual
+
+
+      at /Users/andrewspencer/react/swagger-express-middleware/tests/specs/mock/edit-collection.spec.js:978:55
+      at Test.<anonymous> (tests/fixtures/helper.js:159:9)
+--
+      at process.processTicksAndRejections (node:internal/process/task_queues:81:21)
+
+  19) Edit Collection Mock
+       PUT
+         Determining resource names (by file name)
+           should use an auto-generated resource name if the body is empty:
+     cannot PUT /api/pets/Fido/photos (500)<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Error</title>
+</head>
+<body>
+--
+      at process.processTicksAndRejections (node:internal/process/task_queues:81:21)
+
+  20) Edit Collection Mock
+       POST
+         Determining resource names (by data type)
+           should support undefined values:
+
+      Error: expected '' response body, got '""'
+      + expected - actual
+
+
+      at /Users/andrewspencer/react/swagger-express-middleware/tests/specs/mock/edit-collection.spec.js:564:18
+      at /Users/andrewspencer/react/swagger-express-middleware/tests/specs/mock/helper.js:66:5
+--
+      at process.processTicksAndRejections (node:internal/process/task_queues:81:21)
+
+  21) Edit Collection Mock
+       POST
+         Determining resource names (by data type)
+           should support multipart/form-data:
+
+      Uncaught AssertionError: expected { Label: 'Photo 1', …(3) } to deeply equal { ID: 1030736237, …(3) }
+      + expected - actual
+
+         "ID": 1030736237
+         "Label": "Photo 1"
+         "Photo": {
+--
+      at process.processTicksAndRejections (node:internal/process/task_queues:81:21)
+
+  22) Edit Collection Mock
+       POST
+         Determining resource names (by file name)
+           should use the server-side file name as the resource name:
+
+      Uncaught AssertionError: expected '/api/pets/Fido/photos/1MB.jpg' to not equal '/api/pets/Fido/photos/1MB.jpg'
+      + expected - actual
+
+
+      at /Users/andrewspencer/react/swagger-express-middleware/tests/specs/mock/edit-collection.spec.js:978:55
+      at Test.<anonymous> (tests/fixtures/helper.js:159:9)
+--
+      at process.processTicksAndRejections (node:internal/process/task_queues:81:21)
+
+  23) Edit Collection Mock
+       POST
+         Determining resource names (by file name)
+           should use an auto-generated resource name if the body is empty:
+     cannot POST /api/pets/Fido/photos (500)<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Error</title>
+</head>
+<body>
+--
+      at process.processTicksAndRejections (node:internal/process/task_queues:81:21)
+
+  24) Edit Resource Mock
+       PUT
+         Data type tests
+           should return multipart/form-data:
+
+      Uncaught AssertionError: expected { Label: 'Photo 1', …(2) } to deeply equal { Label: 'Photo 1', …(2) }
+      + expected - actual
+
+         "Description": "A photo of Fido"
+         "Label": "Photo 1"
+         "Photo": {
+--
+      at process.processTicksAndRejections (node:internal/process/task_queues:81:21)
+
+  25) Edit Resource Mock
+       PATCH
+         Data type tests
+           should return multipart/form-data:
+
+      Uncaught AssertionError: expected { Label: 'Photo 1', …(2) } to deeply equal { Label: 'Photo 1', …(2) }
+      + expected - actual
+
+         "Description": "A photo of Fido"
+         "Label": "Photo 1"
+         "Photo": {
+--
+      at process.processTicksAndRejections (node:internal/process/task_queues:81:21)
+
+  26) Edit Resource Mock
+       POST
+         Data type tests
+           should return multipart/form-data:
+
+      Uncaught AssertionError: expected { Label: 'Photo 1', …(2) } to deeply equal { Label: 'Photo 1', …(2) }
+      + expected - actual
+
+         "Description": "A photo of Fido"
+         "Label": "Photo 1"
+         "Photo": {
+--
+      at process.processTicksAndRejections (node:internal/process/task_queues:81:21)
+
+  27) Query Collection Mock
+       application/json
+         GET
+           different data types
+             should return multipart/form-data:
+
+      Uncaught AssertionError: expected [ { Label: 'Photo 1', …(3) } ] to deeply equal [ { ID: 364643335, …(3) } ]
+      + expected - actual
+
+           "ID": 364643335
+           "Label": "Photo 1"
+--
+      at process.processTicksAndRejections (node:internal/process/task_queues:81:21)
+
+  28) Query Collection Mock
+       application/json
+         GET
+           different data types
+             should return a file:
+
+      Uncaught AssertionError: expected [ { fieldname: 'Photo', …(11) } ] to deeply equal [ { fieldname: 'Photo', …(9) } ]
+      + expected - actual
+
+       [
+         {
+--
+      at process.processTicksAndRejections (node:internal/process/task_queues:81:21)
+
+  29) Query Collection Mock
+       application/json
+         GET
+           different data types
+             should return a file attachment:
+
+      Uncaught AssertionError: expected [ { fieldname: 'Photo', …(11) } ] to deeply equal [ { fieldname: 'Photo', …(9) } ]
+      + expected - actual
+
+       [
+         {
+--
+      at process.processTicksAndRejections (node:internal/process/task_queues:81:21)
+
+  30) Query Resource Mock
+       GET
+         different data types
+           should return multipart/form-data:
+
+      Uncaught AssertionError: expected { Label: 'Photo 1', …(3) } to deeply equal { ID: 2800371, Label: 'Photo 1', …(2) }
+      + expected - actual
+
+         "ID": 2800371
+         "Label": "Photo 1"
+         "Photo": {
+--
+      at process.processTicksAndRejections (node:internal/process/task_queues:81:21)
+
+  31) ParamParser middleware
+       Form Data param parser
+         should parse file params:
+
+      AssertionError: expected { Object (Photo) } to deeply equal { Photo: { buffer: null, …(9) } }
+      + expected - actual
+
+       {
+         "Photo": {
+           "buffer": [null]
+      -    "destination": "/private/var/folders/6r/ht8xz_gn027c8gqdj6fbcd4m0000gn/T/swagger-express-middleware--18621-yb6ZocXEZ4V3"
+--
+      at process.processTicksAndRejections (node:internal/process/task_queues:81:21)
+
+  32) RequestParser middleware
+       Multipart form data parser
+         should parse simple fields:
+
+      AssertionError: expected { foo: 'bar', …(3) } to deeply equal { foo: 'bar', …(3) }
+      + expected - actual
+
+
+      at /Users/andrewspencer/react/swagger-express-middleware/tests/specs/request-parser.spec.js:742:38
+      at tryCatch (tests/fixtures/helper.js:90:9)
+      at /Users/andrewspencer/react/swagger-express-middleware/tests/fixtures/helper.js:79:7
+--
+      at process.processTicksAndRejections (node:internal/process/task_queues:81:21)
+
+  33) RequestParser middleware
+       Multipart form data parser
+         should support large file attachments by default:
+
+      AssertionError: expected { file1: { …(12) }, …(2) } to deeply equal { file1: { buffer: null, …(9) }, …(2) }
+      + expected - actual
+
+       {
+         "file1": {
+           "buffer": [null]
+      -    "destination": "/private/var/folders/6r/ht8xz_gn027c8gqdj6fbcd4m0000gn/T/swagger-express-middleware--18621-Mt5KWgCnWAdZ"
