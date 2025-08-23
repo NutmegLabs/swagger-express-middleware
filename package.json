@@ -27,8 +27,7 @@
     "istanbul": "c8 --reporter=html --reporter=text --reports-dir=coverage/node mocha --recursive tests/fixtures tests/specs",
     "test": "npm run istanbul",
     "upgrade": "ncu \"/(!multer)/\" --upgradeAll && npm update",
-    "bump": "bump --prerelease --tag --push --all",
-    "release": "npm run upgrade && npm run build && npm test && npm run bump && npm publish",
+    "version": "npm version",
     "start": "cd samples && node sample2.js"
   },
   "repository": {
@@ -46,8 +45,7 @@
     "mocha": "^10.8.2",
     "npm-check-updates": "^16.14.20",
     "sinon": "^1.16.1",
-    "supertest": "^7.1.4",
-    "version-bump-prompt": "^1.5.1"
+    "supertest": "^7.1.4"
   },
   "dependencies": {
     "ajv": "^6.5.4",
