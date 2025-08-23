@@ -724,6 +724,18 @@ describe('RequestParser middleware', function() {
         swagger(files.parsed.petStore, function(err, middleware) {
           var express = helper.express(middleware.parseRequest());
 
+          express.post('/foo', helper.spy(function(req, res, next) {
+            expect(req.body).to.deep.equal({
+              foo: 'bar',
+              biz: ['42', '43', '44'],
+              baz: ['B', 'C', 'A'],
+              bob: {
+                name: 'bob',
+                age: '42'
+              }
+            });
+          }));
+
           helper.supertest(express)
             .post('/foo')
             .set('Content-Type', 'multipart/form-data')
@@ -737,18 +749,6 @@ describe('RequestParser middleware', function() {
             .field('bob[name]', 'bob')
             .field('bob[age]', '42')
             .end(helper.checkSpyResults(done));
-
-          express.post('/foo', helper.spy(function(req, res, next) {
-            expect(req.body).to.deep.equal({
-              foo: 'bar',
-              biz: ['42', '43', '44'],
-              baz: ['B', 'C', 'A'],
-              bob: {
-                name: 'bob',
-                age: '42'
-              }
-            });
-          }));
         });
       }
     );
