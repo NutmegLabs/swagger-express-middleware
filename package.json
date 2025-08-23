@@ -60,7 +60,7 @@
     "multer": "^0.1.8",
     "ono": "^1.0.22",
     "swagger-methods": "^1.0.0",
-    "swagger-parser": "^5.0.5",
+    "swagger-parser": "^10.0.3",
     "tmp": "0.0.27",
     "type-is": "^1.6.8"
   },
